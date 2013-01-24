@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{macros}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{color}
+
+\begin{document}
+
+\section{TATA41 - Föreläsning 2}
+\section{Kontinuitet}
+Ordet används i vardagligt tal, utan hopp.
+Rita en graf utan att lyfta på pennan.
+
+\subsection{Definition}
+Låt $a\in D_f$. Funktionen $f$ sägs vara kontinuerlig i punkten a
+ifall $f(x)\to f(a)$ då $x\to a$
+(eller, som ett specialfall, om a är en så kallad isolerad punkt i $D_f$.)
+
+\subsubsection{Isolerad punkt}
+Vad är en isolerad punkt? Man skulle kunna säga att det är en punkt i en mängd där en punkt inte har några "grannar".
+\subsubsection{Ekvivalent}
+Låt $a\in D_f$. Funktionen $f$ sägs vara kontinuerlig i punkten a
+ifall det för varje $\epsilon>0$ finns ett $\delta>0$ sådant att $\abs{f(x)-f(a)}<\epsilon$ om $x\in D_f$ och $\abs{x-a}<\delta$.
+
+Annars sägs $f$ vara diskontinuerlig i punkten a.
+
+\subsubsection{Anmärkning}
+Om $x\notin D_f$ så är det inte meningsfullt att tala om kontinuitet eller diskontinuitet för $f$ i den punkten.
+
+\subsection{Exempel}
+Låt
+$$
+f(x)=
+\begin{cases}
+  5, x\neq 3,\\
+  6, x=3,
+\end{cases}
+$$
+
+Vilkoret för kontinuitet i punkten $x=3$ är att $f(x)\to f(3)$ då $x\to 3$.
+Men detta är inte uppfyllt för vi vet från förra gången att $f(x)\to 5$ då $x\to 3$.
+Alltså är $f$ diskontinuerlig i punkten $x=3$.
+
+\subsection{Extra teori}
+Låt
+$$
+f(x)=
+\begin{cases}
+  x, x\in \mathbb Q \\
+  0
+\end{cases}
+$$
+Kontinuerlig i $x=0$ (enbart).
+
+\subsection{Definition av kontinuerlig}
+En funktion kallas kontinuerlig (rätt och slätt) om den är kontinuerlig i varje punkt
+i sin definionsmängd.
+
+\subsection{Extra teori}
+Låt
+$$
+f(x)=
+\begin{cases}
+  x\times \sin{\fr 1x}, x\neq 0\\
+  0, x=0
+\end{cases}
+$$
+
+\subsection{Sats (Mellanliggande värde)}
+En kontinuerlig funktion på ett intervall i $\R$ antar alla mellanliggande värden,
+dvs om $f$ är  kontinuerlig på $\left[ a, b \right]$ och $f(a) < C < f(b)$
+eller $f(a) > C > f(b)$ så finns det (minst) ett reellt tal $\xi \in \left[ a,b \right]$
+sådant att $f(\xi) = C$.
+
+\subsection{Bevis}
+Lokalisera $\xi$ genom intervallhalvering (likt binärsökning). Fullständigheten hos de reella talsystemet
+behövs för att visa att processen verkligen konvergerar mot något tal $\xi\in\R$. Se Appendix A i boken.
+
+\subsection{Sats}
+Om $f$ och g är kontinuerliga så är följande funktioner kontinuerliga (i de punkter där de är definerade):\\
+$f+g, f-g, fg, \fr fg, f\circ g$
+
+\subsubsection{Definition av $f\circ g$}
+$(f\circ g)(x) = f(g(x))$
+
+\subsection{Sats}
+De elementära funktionerna är kontinuerliga.
+
+\subsection{Bevis}
+Se boken
+
+\subsection{Anmärkning}
+Därmed har vi motiverat "$\sqrt{1+\fr 1x}\to\sqrt{1+0}$ då $x\to\infty$" från förra gången.
+
+\subsection{Exempel (Styckvis definerad funktion)}
+$$
+f(x)=
+\begin{cases}
+  x^2+2, x/le 0,\\
+  e^x, x>0,
+\end{cases}
+$$
+är kontinuerlig för $x<0$ och för $x>0$ enligt föregående sats (elementära funktioner).
+Funktionen är diskontinuerlig i punkten $x=0$ (eftersom den saknar gränsvärde där).
+
+\subsection{Exempel}
+Funktionen $f:\R/\ \{0\} \to \R$ som ges av $f(x)=\f 1x$ är kontinuerlig.
+
+\subsection{Exempel}
+Visa att polynomet $p(x) = x^3 + x - 3$ har exakt ett reellt nollställe, och att det ligger i öppna intervallet $\left] 1,2 \right[$.
+Lösning:
+$$
+\begin{cases}
+  p(1)=-1, \\
+  p(2)=7 \\
+\end{cases}
+$$
+Eftersom $-1<0<7$ och alla polynom är kontinuerliga, så säger satsen om mellanliggande värde att det finns
+minst ett tal $\xi\in\left]1,2\right[$ sådant att $p(\xi)=0$.
+Vidare är p strängt växande (ty summa av strängt växande funktioner $ g(x) = x^3$ och $h(x) = x-3$),
+vilket visar att $p(x)<0$ om $x<\xi$, och $p(x)>0$ om $x>\xi$. Alltså är $\xi$ det enda nollstället.
+
+\subsection{Sats (Största och minsta värde)}
+En kontinuerlig funktion på ett kompakt (dvs slutet och begränsat) intervall
+har ett största och ett minsta värde, dvs om $f$ är kontinuerlig på $\left[ a,b\right]$
+så finns det punkter $c\in\left[ a,b \right]$ och $b\in\left[ a,b \right]$ sådana att
+$f(c)\le f(x)\le f(d), \all x \in \left[ a,b \right]$.
+
+\subsection{Bevis}
+Se boken (appendix A).
+
+\subsection{Exempel}
+På det kompakta intervallet [-3,2] har den kontinuerliga funktion $f(x) = x^2$ största värdet $f(-3)=9$ och minsta värdet $f(0)=0$.
+Alla förutsättningarna är nödvändiga för att det garanterat ska finnas största och minsta värde, vilket följande tre exempel visar.
+
+\subsubsection{Exempel (Ej slutet intervall)}
+Funktionen $f(x)=x^3$ saknar största och minsta värde på intervallet $]0,2[$.
+(Men infimum är 0 och supremum är 4).
+
+\subsubsection{Exempel (Obegänsat intervall)}
+Funktionen $f(x)=\f 1x$ saknar minsta värde på intervallet $[1,\infty]$.
+("Råkar" dock har strörsta värde $f(x)=1$).
+
+\subsubsection{Exempel (Diskontinuerlig funktionen)}
+"Bråkdelsfunktionen" $f(x)=x-\floor x$ saknar största värde intervallet $[\f 12, \fr 32]$
+
+\end{document}

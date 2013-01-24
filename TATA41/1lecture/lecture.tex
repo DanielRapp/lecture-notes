@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{macros}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{color}
+
+\begin{document}
+
+\section{TATA41 - Föreläsning 1}
+Föreläsaren heter Hans gunnmark. Det är samma bok som grunken.\\
+Envariabels analys skapades 1700-talet, av Newton och Libnitz.\\
+
+\section{Gränsvärden}
+Slå in ett tal i miniräknaren, tryck på roten ur knappen flera gånger så kommer talet närmare och närmare 1.
+Det kommer aldrig riktigt till 1, det går mot 1.
+
+\subsection{Exempel}
+$\fr 1x$ går mot 0 då $x$ går mot $\infty$\\
+$\fr{x^3-1}{x-1}$ går mot 3 då $x$ går mot 1
+
+\subsection{Definition av gränsvärde}
+Låt $f$ vara en funktion vars definitionsmängd $D_f$ innehåller godtyckligt stora tal
+(dvs $D_f$ är inte en uppåt begränsad mängd).
+
+Påståendet "$f(x) \to A, x \to \infty$" betyder följande:\\
+För varje $\epsilon>0$ (oavsett hur litet) finns ett tal $\omega$ (som får bero på $\epsilon$)
+sådant att $A-\epsilon < f(x) < A+\epsilon, x>\omega$ och $x\in D_f$
+
+\subsection{Exempel}
+Låt $f(x)=\fr 1x$ och undersök om ovanstående vilkor är uppfyllt ifall A=0 resp. A=5.\\
+$$ D_f = \R \ \{0\} = \{x\in\R:x\neq 0\} $$ är ej uppåt begränsad. Ok.\\
+
+\subsubsection{Fallet A=0}
+Låt $\epsilon > 0$ vara godtyckligt, och betrakta olikheten $A-\epsilon<f(x)<A+\epsilon$,\\
+dvs $-\epsilon<\fr 1x<\epsilon$.\\
+Denna olikhet är sann för alla $x > \fr 1\epsilon$ (och för alla $x<\fr{-1}{\epsilon}$, men det är irrelevant här).
+Vilkoret är därmed uppfyllt (med $\omega=\fr 1\epsilon$), vilket betyder att påståendet "$\fr 1x \to 0, x\to\infty$" är sant.
+
+\subsubsection{Fallet A=5}
+Betrakta olikhet $A-\epsilon < f(x) < A+\epsilon$ för (t.ex.) $\epsilon=1$
+$4 < \fr 1x < 6 \eq \fr 16 < x < \fr 14$
+För detta val av $\epsilon$ finns det inget $\omega$ sådant att olikheten är uppfylld för alla $x>\omega$ Vilkoret är därmed ej uppfyllt, så
+"$\fr 1x \to 5, x\to\infty$" är falskt.
+
+\subsection{Sats}
+
+Om $f(x)\to A_1$, och $f(x)\to A_2, x\to\infty$, så är $A_1 = A_2$
+
+\subsection{Bevis}
+Vi antar $A_1\neq A_2$ och härleder en motsägelse.\\
+Låt $\epsilon>0$ vara så litet att intervallen $\left[ A_1 - \epsilon , A_1 + \epsilon \right]$ och $\left[ A_2 - \epsilon , A_2 + \epsilon \right]$ inte överlappar.\\
+Förutsättningen ($f\to A_1$ och $A_2$) innebär (enl. def ovan) att det finns $\omega_1$ och $\omega_2$.\\
+Så att:
+$$
+\begin{cases}
+  A_1-\epsilon < f(x) < A_1+\epsilon, \all x>\omega_1; (x\in D_f)\\
+  A_2-\epsilon < f(x) < A_2+\epsilon, \all x>\omega_2; (x\in D_f)\\
+\end{cases}
+$$
+Men båda olikheterna kan ej vara sanna samtidigt, eftersom intervallen inte överlappar.\\
+Påståendet "$f(x)\to A, x\to\infty$" kan alltså vara sant för högst ett tal A, och om ett sådant tal finns så kalla sdet för gränsvärdet (limes) av $f(x), x\to\infty$
+Skrivsätt:
+$$\lip{x}f(x) = A$$
+
+Obs! Blanda inte ihop de två skrivsätten. Dvs skriv inte skrivsätten t.ex. $\lip{x} A$ eftersom $\lm{x}{\infty} f(x) = A$ (är gränsvärdet).
+Det är $f(x)$ som går mot A inte lim.
+
+\subsection{Räkneregler}
+Man använder nästan aldrig definitionen direkt för att räkna ut gränsvärden. Istället används räknelagar.
+
+\subsection{Sats}
+Om $f(x)\to A$ och $g(x)\to B, x\to\infty$, så gäller även följande då $x\to\infty$.\\
+* $f(x)+g(x)\to A+B$\\
+* $f(x)\times g(x)\to A\times B$ (och $cf(x) \to cA$, c=konstant)\\
+* $\fr{f(x)}{g(x)}\to \fr AB$ om $B\neq0$\\
+Under förutsättning att vänsterledens def.mängder innehåller godt, stora tal.
+
+\subsection{Bevis för räknelagen för plus}
+Låt $\epsilon>0$ Sätt $\phi=\fr \epsilon2$ Gränsvärdes definitionen ger att det finns $\omega_1$ och $\omega_2$ så att
+$$
+\begin{cases}
+  A-\phi < f(x) < A+\phi, x>\omega_1, x\in D_f,\\
+  B-\phi < g(x) < B+\phi, x>\omega_2,  x\in D_g
+\end{cases}
+$$
+
+Ledvis addition ger att
+$$ (A-\phi)+(B-\phi) < f(x) + g(x) < (A+\phi)+(B+\phi) $$ om $x>\omega_1$ och $x>\omega_2$ och $x\in D_f$ och $x\in D_g$
+dvs (eftersom $\phi+\phi + \fr \epsilon2 + \fr \epsilon2 = \epsilon$)
+$$ (A+B)-\epsilon< f(x) + g(x) < (A+B)+\epsilon) $$ om $x>\omega = \max(\omega_1, \omega_2)$ och $x\in D_{f+g}$
+
+\subsection{Exempel}
+Vi har redan visat att $\fr 1x \to 0$ då $x\to\infty$.
+Räknelagen för gånger ger då
+$$ \fr 1{x^2}=\fr 1x \times \fr 1x \to 0\times 0 = 0, x\to\infty $$
+$$ \fr 1{x^3}=\fr 1{x^2} \times \fr 1x \to 0\times 0 = 0, x\to\infty $$
+osv.\\
+
+Även t.ex. $\fr 1{x^{\fr 12}} = \fr 1{\sqrt x} \to x\to \infty$.
+Räknelagarna ger även t.ex.
+$$ \fr{2x^2-3x+1}{5x^2+4} = \fr{x^2(2-\fr 3x + \fr 1{x^2})}{x^2(5+\fr 4{x^2})} \to \fr{2-0+0}{5+0} = \fr 25, x\to\infty $$
+och\\
+
+$ \sqrt{x^2+x} - x = \fr{(\sqrt{x^2} + x)(\sqrt{x^2} - x)}{\sqrt{x^2} + x} = \fr{(x^2 + x) - x^2}{\sqrt{x^2+x} + x} = \fr{x}{ \sqrt{x^2} \sqrt{1+\fr 1x} + x } = \fr{x}{x(\sqrt{1+\fr 1x} + 1)} =
+\fr{1}{\sqrt{1+\fr 1x} + 1} \to \fr{1}{\sqrt{1+0} + 1} = \fr 12, x\to\infty $\\
+
+Vi kan anta att $x>0$ när vi ska låta $x\to\infty$. Då är $\sqrt{x^2} = \abs{x} = x$\\
+I sista steget används att $\sqrt x$ är en kontinuerlig funtion. Mer om det nästa gång.\\
+
+Se boken för det def. av gr.v då $x\to -\infty, x\to a$ (ett reellt tal),
+då $x\to a^+$ resp $a^-$ (höger- resp vänster-gränsvärde), och av s.k. oegentligt gr.v.
+$f(x)\to\infty$ eller $-\infty$.
+
+\subsection{Exempel}
+$$ \lm{x}{2} \fr{x^2+x-6}{x^2-4} = \fr 54 $$ty
+$$ \fr{x^2+x-6}{x^2-4} = \fr{(x-2)(x+3)}{(x-2)(x+2)} = \fr{x+3}{x+2} \to \fr{2+3}{2+2} = \fr 54, x\to 2$$
+
+\subsection{Exempel}
+
+% TODO: graf av y=1\x
+Låt $f(x)=\fr 1x$ (för $x\neq 0$)\\
+* $f(x)\to \infty$ då $x\to 0^+$\\
+* $f(x)\to -\infty$ då $x\to 0^-$\\
+* $f(x)$ har inget gr.v. (inte ens oengentligt) då $x\to 0$
+
+\subsection{Exempel}
+Låt:
+% TODO: graf av y=f(x), 6 och 5 markerat på y, 3 på x
+$$
+f(x) =
+\begin{cases}
+  5, x \neq 3,\\
+  6, x = 3,\\
+\end{cases}
+$$
+
+Då är $\lm x3 f(x) =5$ (Att f(3) = 6 påverkar per def. inte gränsvärdet)
+
+\end{document}
