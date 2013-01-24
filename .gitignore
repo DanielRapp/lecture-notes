@@ -1,0 +1,7 @@
+*.sty
+*.vim
+*.sw*
+*.log
+*.fls
+*.fdb_latexmk
+*.aux
