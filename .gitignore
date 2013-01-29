@@ -1,5 +1,7 @@
 *.vim
 *.sw*
+*.dvi
+*.ps
 *.log
 *.fls
 *.fdb_latexmk
