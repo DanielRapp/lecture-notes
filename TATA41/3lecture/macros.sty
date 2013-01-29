@@ -1,0 +1,33 @@
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Sats}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+  \ifdim\lastskip<1.5em \hskip-\lastskip
+  \hskip1.5em plus0em minus0.5em \fi \nobreak
+  \vrule height0.75em width0.5em depth0.25em\fi}
+
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\lm}[2]{\displaystyle \lim_{#1 \rightarrow #2}}
+\newcommand{\lip}[1]{\displaystyle \lim_{#1 \rightarrow \infty}}
+\newcommand{\lin}[1]{\displaystyle \lim_{#1 \rightarrow -\infty}}
+\newcommand{\lzp}[1]{\displaystyle \lim_{#1 \rightarrow 0^+}}
+\newcommand{\lzn}[1]{\displaystyle \lim_{#1 \rightarrow 0^-}}
+\newcommand{\fr}[2]{\frac{#1}{#2}}
+\newcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\all}{\forall}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\ceil}[1]{\lceil #1\rceil}
+\newcommand{\floor}[1]{\lfloor #1\rfloor}
+\DeclareMathOperator{\im}{\implies}
+\DeclareMathOperator{\df}{\fr{\delta x}{\delta y}}
+\DeclareMathOperator{\eq}{\Leftrightarrow}
+\DeclareMathOperator{\nim}{\notimplies}
+\DeclareMathOperator{\heav}{\mathcal{H}(x)=\begin{cases} 0, & x < 0, \\ 1, & x \ge 0, \end{cases}}
