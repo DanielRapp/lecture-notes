@@ -10,3 +10,4 @@ If you just want to view the PDF-notes:
  * [lecture 2](/DanielRapp/lecture-notes/raw/master/TATA41/2lecture/lecture.pdf)
  * [lecture 3](/DanielRapp/lecture-notes/raw/master/TATA41/3lecture/lecture.pdf)
  * [lecture 4](/DanielRapp/lecture-notes/raw/master/TATA41/4lecture/lecture.pdf)
+ * [lecture 5](/DanielRapp/lecture-notes/raw/master/TATA41/5lecture/lecture.pdf)
