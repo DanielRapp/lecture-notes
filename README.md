@@ -11,3 +11,4 @@ If you just want to view the PDF-notes:
  * [lecture 3](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/3lecture/lecture.pdf)
  * [lecture 4](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/4lecture/lecture.pdf)
  * [lecture 5](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/5lecture/lecture.pdf)
+ * [lecture 6](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/6lecture/lecture.pdf)
