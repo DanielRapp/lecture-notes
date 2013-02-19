@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\xa}{x-a}
+\newcommand{\xan}[1]{(\xa)^{#1}}
+\newcommand{\xab}{x^2+ax+b^2}
+\newcommand{\xabn}[1]{(\xab)^{#1}}
+
+\begin{document}
+Ny föreläsare Mikael Langer.
+\section{Integration av rationella funktioner}
+\subsection{}
+Vi vill bestämma $\int{\pq dx}$ där $p$ och $q$ är polynom med reella kofficienter.
+Kan alltid göras! (I teorin, i praktiken kan det vara svårt) Tre steg:
+
+\subsubsection{Steg 1}
+Om $grad\ p \ge grad\ q$ : gör en polynomdivision.
+$$ \pq = \cdots = k(x) + \rqq$$
+$k(x)$, $r(x)$ och $q(x)$ är alla polynom.
+$$grad\ r \ge grad\ q$$
+$\int{\pq dx} = \int{k(x)}+\int{\rqq}$\\
+$\int{k(x)}$ är enkelt.\\
+$\int{\rqq}$ vidare till steg 2 och 3.
+
+\subsubsection{Steg 2}
+Faktorisera $q$ så långt som möjligt i reella faktorer.
+$q$ reella kofficienter ger att faktorerna har gradtal $\le 2$
+\begin{itemize}
+    \item $\xa$
+    \item $\xab$ saknar reella nollställen
+\end{itemize}
+
+\subsubsection{Steg 3}
+Gör en partialbråksuppdelning (PBU) av $\rqq$.(Används i elektriska kretsar).
+
+Att sätta på gemensam nämnare:
+$$ \f1{x-1}-\f1{x+1}=\f{x+1-(x-1)}{(x-1)(x+1)}=\f2{(x-1)(x+1)} $$
+
+Partialbråksuppdelning är motsatsen:
+$$ \f2{(x-1)(x+1)}=\cdots= \f1{x-1}-\f1{x+1}$$
+dvs att bryta upp $\rqq$ i småbitar - partialbråk - som är lätta att integrera.
+$$\int{\f2{(x-1)(x+1)}dx} = \int{\f1{x-1}dx} - \int{\f1{x+1}dx} = \ln\abs{x-1} - \ln\abs{x+1} + C$$
+$\rqq$ blir en summa av partialbråk enligt en ansats
+
+\begin{tabular}{ l l }
+  Faktor i q & ger \\\hline
+  $\xa$ & $\f{A}{\xa}$\\
+  $\xan{n}$ & $\f{A_1}{\xa}+\f{A_2}{\xan{2}}+\cdots+\f{A_n}{\xan{n}}$\\
+  $\xab$ & $\f{Ax+B}{\xab}$\\
+  $\xabn{n}$ & $\f{A_1x+B_1}{\xab}+\cdots+\f{A_nx+B_n}{\xabn{n}}$\\
+\end{tabular}
+
+\subsection{Exempel}
+$$ \pq = \f{6x^3-8x+4}{x^4+4x^2} $$
+Steg 1 klart ty $grad\ p < grad\ q$.
+$$ q(x)= x^4+4x^2 = x^2(x^2+4)=(x-0)^2(x^2+4)$$
+Partialbråksuppdelning-ansats:
+$$ \pq = \f{6x^3-8x+4}{x^2(x^2+4)} = \f Ax + \f A{x^2} +\f {Cx+D}{x^2+4}\ (*)$$
+A, B, C, D? Multiplicera $(*)$ med $q(x)$ på bägge sidor.
+$${\color{red}6}x^3{\color{green}-8}x+{\color{blue}4} = Ax(x^2+4) + B(x^2+4) + (Cx+D)x^2 =$$
+Samla alla $x$ termer:
+$$=(\cdots)x^3 + (\cdots)x^2 + (\cdots)x + (\cdots) =$$
+$$={\color{red}(A+C)}x^3 + {\color{black}(B+D)}x^2 + {\color{green}(4A)}x + {\color{blue}(4B)}$$
+Lika för alla x $\eq$ kofficienter lika.
+$$
+\begin{cases}
+A+C = 6\ (x^3)\\
+B+D = 0\\
+4A=-8\\
+4B=4
+\end{cases}
+\eq
+\begin{cases}
+A=-2\\
+B=1\\
+C=8\\
+D=-1
+\end{cases}
+$$
+$$ \pq = -\f 2x + \f1{x^2} + \f{8x-1}{x^2+4} $$
+
+\subsection{Exempel}
+$$ \pq = \f{-3}{(x-17)^{40}} $$
+Är redan ett partialbråk så klar!
+
+\subsection{Exempel}
+$$q(x)=x(x-1)^3(x^2+2x+2)(x^2-4x+10)^2$$
+$grad\ q = 10$
+$$ \pq = \f Ax + \f{B_1}{x-1} + \f{B_2}{(x-1)^2}+\f{B_3}{(x-1)^3} + \f{Cx+D}{x^2+2x+2} +
+\f{E_1x+F_1}{x^2-4x+10}+\f{E_2x+F_2}{(x^2-4x+10)^2}$$
+
+Om $grad\ p < 10$
+
+\section{Primitiver av partialbråk}
+\begin{enumerate}
+    \item $\int{\f A{x-a} dx} + A\ln\abs{x-a} +C$
+    \item $\int{\f A{(x-a)^n} dx} + A\int{(x-a)^{-n}dx} = \f A{1-n}(x-a)^{1-n} + C $
+    \item $\int{\f{Ax+B}{\xab}} = \bmat{\xab = (x+\f a2)^2 - \f {a^2}4 + b \\ t =x+\f a2} =
+      \int{\f{Dt+E}{t^2+\alpha^2} dt} = \int{\f{Dt}{t^2+\alpha^2}dt}= \f D2 \ln(t^2+\alpha^2) + C$
+    \item $\int{\f E{t^2+\alpha^2} dt} = \f E\alpha \arctan \f t\alpha + C\ \pa{\int{\f1{t^2+\alpha^2}} = \f1{\alpha^2}\int{\f1{\pa{\f t\alpha}^2 + 1}dt} = \bmat{s=\f t\alpha}}$
+    \item $\int{\f{Ax+B}{\xabn{n} dx} = \int{\f{Dt+E}{(t^2+\alpha^2)^n}dt}}$\\
+      $\int{\f{Dt}{(t^2+\alpha^2)^n} = \bmat{s=t^2+\alpha^2 \\ \f{ds}{dt} = 2t \\ tdt = \f 12 ds} = \dots}$\\
+      $\int{\f E{(t^2+\alpha^2)^n}dt}$ Knepig. Man partialintegrerar successivt $\int{1\times\f1{t^2+\alpha^2}dt}$
+\end{enumerate}
+
+\section{Genväg: handpåläggning}
+\subsection{Exempel}
+$$ f(x) = \pq = \f{x+2}{x^2(x-1)} = \f Ax + \f B{x^2} + \f C{x-1} $$
+Handpåläggning ger: C=3, B=-2\\
+$$ (x-1)f(x) = \f{x+2}{x^2} = (x-1)\pa{\f Ax + \f B{x^2}} + C $$
+Låt $x\to 1$
+$$ \f{x+2}{x^2}\to 3$$
+$$(x-1)\pa{\f Ax + \f B{x^2}} \to 0(A+B) $$
+dvs $3=0+C$
+$$x^2f(x) = \f{x+2}{x-1} = Ax+B + \f {Cx^2}{x-1}$$
+Låt $x\to 0$
+$$\f{x+2}{x-1} \to -2$$
+$$Ax\to 0$$
+$$ \f {Cx^2}{x-1} \to 0$$
+dvs $-2 = 0+B+0$
+A kan ej fås på detta sätt - pröva!
+
+\subsubsection{Kan ges av handpåläggning}
+\begin{tabular}{ l l }
+  Faktor i q & ger \\\hline
+  $\xa$ & ${\color{red}\f{A}{\xa}}$\\
+  $\xan{n}$ & $\f{A_1}{\xa}+\f{A_2}{\xan{2}}+\cdots+{\color{red}\f{A_n}{\xan{n}}}$\\
+  $\xab$ & $\f{Ax+B}{\xab}$\\
+  $\xabn{n}$ & $\f{A_1x+B_1}{\xab}+\cdots+\f{A_nx+B_n}{\xabn{n}}$\\
+\end{tabular}
+
+\subsubsection{}
+$$ \f{x+2}{x^2(x-1)} = \f Ax - \f 2{x^2} + \f 3{x-1}\ (*) $$
+
+\subsubsection{Alt 1}
+Mult med $q=x^2(x-1)$ på bägge sidor om $(*)$ som förut. Jämför kofficienter. Bara en obekant
+
+\subsubsection{Alt 2}
+Stoppa in ett smart $x$ i $(*)$. T.ex. x=-1 (eller t.ex. x=2):
+$$ \f{-1+2}{(-1)^2(-2)} = -\f 12  = -A-2-\f 32 $$
+Så $A = -3$.
+
+\subsubsection{Alt 3}
+Mult $(*)$ med $x$ och låt $x\to \infty$
+$$ \f{x+2}{x(x-1)} = A-\f 2x + \f{3x}{x-1} $$
+Låt $x\to \infty$
+$$ \f{x+2}{x(x-1)}\to 0 $$
+$$\f 2x \to 0$$
+$$\f{3x}{x-1} \to 3 $$
+
+dvs $x=A+3$
+\end{document}

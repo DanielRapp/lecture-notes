@@ -13,6 +13,7 @@ If you just want to view the PDF-notes:
  * [lecture 5](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/5lecture/lecture.pdf)
  * [lecture 6](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/6lecture/lecture.pdf)
  * [lecture 7](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/7lecture/lecture.pdf)
+ * [lecture 8](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/8lecture/lecture.pdf)
 
 * TATA40 - Matematiska utblickar
  * [lecture 1](http://github.com/DanielRapp/lecture-notes/raw/master/TATA40/1lecture/lecture.pdf)
