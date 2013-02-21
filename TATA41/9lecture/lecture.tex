@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\xa}{x-a}
+\newcommand{\xan}[1]{(\xa)^{#1}}
+\newcommand{\xab}{x^2+ax+b^2}
+\newcommand{\xabn}[1]{(\xab)^{#1}}
+
+\begin{document}
+\section{Integration av triginomiska uttryck}
+\subsection{Exempel}
+$$ \int{dx \over \cos^3 x} = \int{\cos x\ dx \over \cos^4 x} = \int{\cos x\ dx \over (1-\sin^2 x)^2}
+= \bmat{s=\sin x \\ ds = cos x\ dx} = \int{ds \over (1-s^2)^2} = \int{\f{ds}{(1-s)^2(1+s)^2}}  =$$
+$$ =\bmat{\f1{(1-s)^2(1+s)^2} = \f A{1-s}+\f B{(1-s)^2} + \f C{1+s} + \f D{(1+s)^2}\ (*) \\
+B=D=\f 14} $$
+Multiplicera $(*)$ med s och låt $s\to\infty \im 0 = -A+0+C+0$\\
+Låt $s=0$ i $(*) \im 1 = A+B+C+D \im A+C=\f 12$\\
+Alltså $A=B=C=D=\f 14$
+$$ = \f 14 \int{\pa{\f1{1-s} + \f1{(1-s)^2} + \f1{1+s} + \f1{(1+s)^2} } ds } =$$
+$$ = \f 14 \pa{-1\ln\abs{1-s} + \f1{1-s} \ln\abs{1+s} - \f1{1+s} +C } $$
+$$ \f 14\pa{\ln\abs{\f{1+s}{1-s}} + \f{2s}{1-s^2} + C} $$
+$$ = \f14 \ln\abs{\f{1+\sin x}{1-\sin x}} + \f{\sin x}{2\cos^2 x}+ C $$
+Kan även skrivas:
+$$\f14 \ln\abs{\f{1+\sin x}{1-\sin x}} = \f14 \ln \abs{\f{(1+\sin x)^2}{ (1-\sin x) (1+\sin x)}} = \f14\ln\abs{\f{1+\sin x}\cos x}^2 = \f12\ln{\f{1+\sin x}\cos x}$$
+Alltihop skrivs ibland:
+$$ \int{\sec^3 x\ dx} = \f12\ln\abs{\sec x + \tan x}  + \f12\sec x\tan x + C$$
+
+\subsection{Exempel (Produkt-till-summa-omskrivning)}
+$$ \sin^2 x \cos 3x = \pa{\f{e^{ix} - e^{-ix} }{2i} }^2 \pa{\f{e^{i3x} + e^{-i3x}}2} =\bmat{t=e^{ix}} =$$
+$$ =\pa{\f{t^1-t^{-1}}{2i}}^2 \pa{\f{t^3 + t^{-3}}2} = -\f 18\pa{t^2-2+t^{-2}}\pa{t^3+t^{-3}} =$$
+$$=-\f18\pa{\pa{t^5+t^{-5}}-2\pa{t^3+t^{-3}} + \pa{t+t^{-1}}} =$$
+$$= -\f14\pa{\cos 5x - 2\cos 3x + \cos} $$
+ger
+$$ \int{\sin^2 x\cos 3x\ dx} = -\f14\pa{\f{\sin 5x}5 - 2 \f{\sin 3x}3 +\sin x}+C =$$
+$$ = -\f1 {20} \sin 5x + \f 16 \sin 3x - \f14\sin x +C $$
+Notera särskilt:
+$$ \int{\cos^2 x\ dx} = \f12 \int{\pa{1+\cos 2x\ dx}} = \dots$$
+$$ \int{\sin^2 x\ dx} = \f12 \int{\pa{1-\cos 2x\ dx}} = \dots$$
+
+\subsection{Exempel (När inget annat funkar)}
+Variabelbytet $v=2\arctan t$ (alltså $t=\tan\f v2$ med $-\pi < v<\pi$)
+
+Omvandlar trig integral till rationell integral:
+$$ \cos v + i \sin v = e^{iv} = e^{i2\arctan t} = \pa{e^{i \arctan t}}^2 $$
+$$ =\pa{\f{1+it}{\sqrt{1+t^2}}}^2  = \f{(1-t^2) + i(2t)}{1+t^2} = \f{1-t^2}{1+t^2} + i\f{2t}{1+t^2}$$
+$$ \f{dv}{dt} = \f d{dt}\pa{2\arctan t} = \f2{1+t^2}\im dv=\f{2dt}{1+t^2} $$
+
+\subsection{Exempel}
+$$\int{\f{dv}{5-4\cos v}} =\bmat{t=\tan \f v2 \\\vdots} = \int{\f{\f2{1+t^2}dt}{5-3\f{1-t^2}{1+t^2}}}=$$
+$$=\int{\f{2\ dt}{5(1+t^2)-3(1-t^2)}} = \int{\f{dt}{1+4t^2}} = \int{\f{dt}{1+(2t)^2}} = \f 12 \arctan 2t +C  $$
+$$ = \f 12 \arctan \pa{2\tan \f v2} + C $$
+
+\section{Integration av rotuttryck}
+\subsection{Exempel}
+$$ \int{\f x{\sqrt{x+1}\ dx}} = \bmat{t=\sqrt{x+1} \\ x= t^2-1 \\ dx=2t\ dt} = \int{\f{t^2-1}t 2t\ dt}=$$
+$$ = \f 23 t^3 - 2t + C = \f 23 t \pa{t^2-3} +C = \f 23 \sqrt{x+1}\pa{x-2}+C$$
+
+\subsection{Exempel}
+$$\int{\f x{\sqrt{x^2+4x+5} } dx} =\bmat{t=x+2\\ dt=dx} = \int{\f{t-2}{\sqrt{t^2+1}} dt} =$$
+$$=\int{ 2t\f 12 \pa{t^2+1}^{-1/2} dt - 2\int{dt\over \sqrt{t^2+1}} }=$$
+$$ = (t^2+1)^{1/2}  - 2\ln\pa{t+\sqrt{t^2+1}} +C=$$
+$$ = \sqrt{x^2+4x+5} - 2\ln\pa{x+2+\sqrt{x^2+4x+5}} +C$$
+
+\subsection{Exempel}
+$$ \int{\f{dx}{x^2\sqrt{1+x^2}}} = \bmat{x=\tan v \\ \f{dx}{dv} = \f 1{\cos^2 v} \\ \sqrt{1+x^2} = \sqrt{1+\tan^2 v}  = \sqrt{1+\f{\sin^2 v}{\cos^2 v}} = \sqrt{\f 1{\cos^2 v}} = \f 1{\abs{\cos v}}}=$$
+$$ \int{ \f{ \f{dv}{cos^2 v} } { \tan^2 v \f 1{\cos v} } } = \int{\f{\cos v}{\sin^2 v} dv} = -\f1{\sin v} +C$$
+$$ \f{-1}{\f x{\sqrt{1+x^2}}} +C = -\f {\sqrt{1+x^2}}x + C $$
+
+\subsubsection{Annat sätt}
+$$ \int{\f{dx}{x^2\sqrt{1+x^2}}} =\bmat{t=\f 1x\ (anta\ x>0,\ och\ t>0) \\ dt=\f{-dx}{x^2}} =$$
+$$ \int{\f{-dt}{\sqrt{1+\pa{\f 1t}^2}}} = \int{\f{-dt}{\sqrt{\f{t^2+1}{t^2}}}} = \int{ \f{-t\ dt}{\sqrt{t^2+1}} } =$$
+$$ = -\sqrt{t^2+1} + C= -\sqrt{\pa{\f 1x}^2 + 1} + C = -\f{\sqrt{1+x^2}x} + C$$
+(Stämmer även för $x<0$, ty räkningarna när man kontrollderiverar påverkas inte av vilket tecken $x$ har.)
+
+\end{document}
