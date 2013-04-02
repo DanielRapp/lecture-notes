@@ -8,6 +8,8 @@ If you just want to view the PDF-notes:
 * TATA42 - Envariabelanalys 2 (chronological order)
  * [Plan area, kurvangd, volym](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/1lecture/lecture.pdf)
 
+---
+
 * TATA41 - Envariabelanalys 1 (chronological order)
  * [Gränsvärden: definition och räkneregler](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/1lecture/lecture.pdf)
  * [Kontinuitet, egenskaper hos kontinuerliga funktioner](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/2lecture/lecture.pdf)
@@ -20,6 +22,8 @@ If you just want to view the PDF-notes:
  * [Integration av trigonometriska uttryck och rottuttryck](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/9lecture/lecture.pdf)
  * [Riemannintegralen: defintion, räkneregler, existens, egenskaper](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/10lecture/lecture.pdf)
  * [Generaliserade integraler. Summor och integraler.](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/11lecture/lecture.pdf) (thanks [@adamnyberg](https://github.com/adamnyberg) for the illustrations)
+
+---
 
 * TATA40 - Matematiska utblickar
  * [lecture 1](http://github.com/DanielRapp/lecture-notes/raw/master/TATA40/1lecture/lecture.pdf)
