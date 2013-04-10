@@ -5,7 +5,7 @@ I write the notes in real-time, so there's going to be a lot of mistakes. Please
 ## PDFs
 If you just want to view the PDF-notes:
 
-* TATA42 - Envariabelanalys 2 (chronological order)
+* TATA42 - Envariabelanalys 2 (chronological order). All illustrations by [Adam Nyberg](https://github.com/adamnyberg).
  * [Plan area, kurvangd, volym](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/1lecture/lecture.pdf)
  * [Rotationsarea, tyngdpunkt, Guldins regler](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/2lecture/lecture.pdf)
 
