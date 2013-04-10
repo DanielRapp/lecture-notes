@@ -7,6 +7,7 @@ If you just want to view the PDF-notes:
 
 * TATA42 - Envariabelanalys 2 (chronological order)
  * [Plan area, kurvangd, volym](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/1lecture/lecture.pdf)
+ * [Rotationsarea, tyngdpunkt, Guldins regler](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/2lecture/lecture.pdf)
 
 * TATA41 - Envariabelanalys 1 (chronological order)
  * [Gränsvärden: definition och räkneregler](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/1lecture/lecture.pdf)
