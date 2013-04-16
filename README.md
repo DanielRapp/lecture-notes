@@ -9,7 +9,7 @@ If you just want to view the PDF-notes:
  * [Plan area, kurvangd, volym](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/1lecture/lecture.pdf)
  * [Rotationsarea, tyngdpunkt, Guldins regler](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/2lecture/lecture.pdf)
  * [Taylorutveklingar, elementära Maclaurinutvecklingar](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/3lecture/lecture.pdf)
- * [Tillämpningar av Maclaurinutveklingar](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/3lecture/lecture.pdf)
+ * [Tillämpningar av Maclaurinutveklingar](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/4lecture/lecture.pdf)
 
 ---
 
