@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+
+\begin{document}
+\section{Tillämpningar av Lagranges form på resttermen}
+Om $f, f', f'', \dots, f^{(n+1)}$ är kontinuerliga.
+$$ f(x) = f(0) + f'(0)x + \dots + \f{f^n(0)}{n!}x^n + \Or(x^{n+1}) $$
+$$ r(x) = \Or(x^{n+1}) \eq r(x) = b(x)x^{n+1}, \abs{b(x)} \le C $$
+
+\subsection{Sats}
+Om $f, f', f'', \dots, f^n$ är kontinuerliga i $[\alpha, \beta]$.
+och $0 \in [\alpha, \beta]$, så
+$$ p_n(x) + r(x) $$
+där
+$$ r(x) = \f{f^{n+1}(c)}{(n+1)!}x^{n+1} $$
+$c$ ligger mellan $0$ och $x$.
+% img 1
+% img 2
+
+$$ f(x) = f(0) + f'(0)x + \dots + \f{f^n(0)}{n!}x^n + \f{f^{(n+1)}(c)}{(n+1)!}x^{n+1} $$
+
+\subsection{Taylor utveckling med restterm i Lagranges form}
+$$ f(x) = f(a) + f'(a)(x-a) + \dots + \f{f^n(a)}{n!}(x-a)^n + \f{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1} $$
+där $c$ ligger mellan $x$ och $a$.
+
+\subsection{Ex 1}
+Approximera $\sin 0.1$ med ett rationellt tal så att felet är mindre än $10^{-7}$
+$x=0.1, f(x) = \sin x$
+$$ \sin x = x - \f{x^3}{3!} + \dots + r(x), r(x) = \f{f^{(n+1)}(c)}{(n+1)!}x^{n+1}, 0<c<0.1, x=10^{-1} $$
+$$ \abs{r(x)} \le \f1{(n+1)!}\pa{10^{-1}}^{n+1} $$
+$$ n=4\im\abs{r(x)}\le\f1{5!}10^{-5}=\f{10^-5}{120}<\f 1{100} 10^{-5} = 10^{-7} $$
+
+$$ \sin x = x - \f{x^3}{3!} + r(x), \abs{r(x)} =\abs{\f{f^{(5)}(x)}{5!}x^5} \le \f{10^{-5}}{120} < 10^{-7}$$
+$$ \sin 0.1 \approx 0.1 - \f{0.1^3}{3!} \approx 0.099833 $$
+
+\subsection{Ex 2}
+Approximera $\sqrt{1.1}$ så att felet är mindre än $10^{-4}$
+$$ (1+x)^{\f 12}; x=0.1=10^{-1}  $$
+$$ (1+x)^{\f 12} = 1+\f 12 + \f{f 12(\f 12 -1)}2 x^2 + \f{\f 12(\f 12 - 1)(\f 12 -2 )}{3!}x^3 + r(x) $$
+$$ r_4(x) = \f{f^{(4)}(x)}{4!}x^4 $$
+
+$$ (1+x)^{\f 12} = 1+\f 12 + \f{f 12(\f 12 -1)}2 x^2 + r_3(x) $$
+$$ r_3(x) = \f{f'''(c)}{3!}x^3 $$
+
+$$ f(x)= (1+x)^{\f 12} $$
+$$ f'(x)= \f 12(1+x)^{\f -12} $$
+$$ f''(x)= \f 12 (\f 12 - 1)(1+x)^{\f 12 - 2} $$
+$$ f'''(x)= \f 12 (\f 12 - 1)(\f 12 - 2)(1+x)^{\f 12 - 3} $$
+$$ \abs{r_3(x)} = \abs{ \f 3{2^3(1+c)^{\f 52}} \f{x^3}{3!} } = \f{\abs{x}^3}{2^4}\f 1{(1+c)^{\f 52}} $$
+där $ 0<c<0.1$
+$$ \abs{r_3(0.1)} = \f{10^{-3}}{16} \f1{(1+c)^{\f 52}} \le \f{10^{-3}}{10} = 10^{-4} $$
+
+$$ \sqrt{1+x} \approx 1+\f 12 x + \f{\f 12(\f 12 - 1)}2x^2 $$
+med $\abs{r(x)} < 10^{-4}$
+$$ x=0.1, \sqrt{1.1} \approx 1+\f 120.1 - \f 18 0.1^2 = 1.04875  $$
+
+\subsection{Ex 3}
+Använd Maclaurinutveckling av ordning 4 av $\cos x$ för att approximera
+$$ I = \int^1_0{ \f{1-\cos x}{x^2} dx } $$
+$$ \cos x = 1 - \f {x^2}{2!} + \f{x^4}{4!} + r(x) $$
+$$ r(x) = \f{f^{(6)}(c)}{6!}x^6 $$
+$$ \f{1-\cos x}{x^2} = \f12 - \f{x^2}{4!}-\f{r(x)}{x^2} $$
+$$ I = \int^1_0\pa{\f 12 - \f {x^2}{4!} - \f{r(x)}{x^2}} dx = \int^1_0\pa{\f 12 - \f {x^2}{4!}} dx + R $$
+$$ I \approx \pa{\f 12 x - \f{x^3}{3*4!}} = \f 12 - \f 1{3*4!} $$
+$$ \abs{R} = \abs{-\int^1_0\f{f^{6}(c)}{6!}x^4dx} \le \int^1_0\abs{\f{f^{(6)}{6!}}} dx$$
+$$ \abs{\f{f^{(6)}{6!}}} = \f{\abs{f^{(6)}(c)}}{6!}\abs{x^4} \le \f{x^4}{6!}$$
+$$ R \le \int^1_0\abs{\f{f^{6}(c)}{6!}x^4}dx \le  \int^1_0\abs{\f{x^4}{6!}x^4}dx = \f 1{3600} < \f 1{1000} = 10^{-3} $$
+$$ I \approx \f 12 - \f 1{3*4!} $$
+med
+$$ \abs{R} < 10^{-3} $$
+
+\subsection{Ex 4}
+%Visa att $\f{x^4}{2*4!} \le \cos x  - (1- \f {x^2}2) \le \f{x^4}{4!}$,
+%$p_2(x) = 1-\f{x^2}2$ - Maclaurinutveckling av ordning 2 av $cos x$
+%$$\f{x^4}{2*4!} \le \cos x  - p_2(x) \le \f{x^4}{4!}$$
+
+$$  $$
+$$  $$
+$$  $$
+
+\end{document}
