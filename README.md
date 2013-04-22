@@ -12,7 +12,7 @@ If you just want to view the PDF-notes:
  * [Tillämpningar av Maclaurinutveklingar](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/4lecture/lecture.pdf)
  * [Tillämpningar av Lagranges form på resttermen](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/5lecture/lecture.pdf)
 
-I decided not to continue such thorough notes after finding [this](http://www.mai.liu.se/~tosjo/kurser/TATA42/), so the rest will not be commited.
+I decided to only make partial notes after finding [this](http://www.mai.liu.se/~tosjo/kurser/TATA42/), so the rest of TATA42 will not be commited.
 
 ---
 
