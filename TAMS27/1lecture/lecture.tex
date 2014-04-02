@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+
+\begin{document}
+\section{TAMS27}
+\subsection{Kombinatorik}
+Hur många möjligheter finns?
+\subsection{Definition}
+\subsubsection{Permutation}
+En permutation är ett arrangemang av ett antal objekt \underline{med} hänsyn till deras ordning.
+\subsubsection{Kombination}
+En kombination är ett val at ett antal objekt \underline{utan} hänsyn till deras ordning.
+
+\subsection{Ex}
+Alla permutationer av objekten A, B, C:\\
+$$ ABC, ACB, BAC, BCA, CAB, CBA $$
+Alla kombinationer: 
+$$ ABC $$
+
+\subsection{Ex}
+Vi har 3 objekt A, B, C. Vi ska välja ut 2 st och ordna dem.
+Vi får följande möjligheter:
+$$ AB, BA, AC, CA, BC, CB $$
+Vi ska välja 2 st utan att ordna dem.
+$$ AB, BC, AC $$
+
+\subsection{Multiplikationsprincipen}
+Betrakta ett experiment som utförs i k steg. Låt för $ i = 1, \cdots, k $ och $ n_i $ vara antalet sätt som steg i kan utföras på.
+Det totala antalet sätt som experimentet kan utföras på blir då.
+$$ n = n_i * \cdots * n_k $$
+
+\subsection{Beteckning}
+$$ n! = 1*2* \cdots *n $$
+$$ 0! = 1 $$
+
+\subsection{Sats}
+\subsubsection{A}
+Antalet sätt att arrangera i ordning (d.v.s. permutera) r olika objekt valda ur en mängd med n stycken är:
+$$ \f{n!}{(n-r)!} = n*(n-1)*\cdots*(n-r+1) $$
+\subsubsection{B}
+Antalet sätt att välja r olika objekt utan återläggning ur en mängd med n stycken utan hänsyn till deras inbörda ordning.
+$$ {n \choose r} = \f{n!}{(n-r)!r!} = \f{n*(n-1)*\cdots*(n-r+1)}{r!} $$
+
+\subsection{Beviset}
+\subsubsection{A}
+Beviset av A delen med multiplikationsprincipen.
+\subsubsection{B}
+Beviset av B följer ifrån observationenn $ \# permutationer = \# kombinationer * r! $
+
+\subsection{Exempel}
+5 bilar anländer till en parkeringsplats med 7 enskilda platser. På hur många sätt kan bilarna placeras?
+Svar: Sats A:
+$$ \f{7!}{(7-5)!} = 2520 $$
+
+\subsection{Exempel}
+Man har 20 motorer av vilka 5 är defekta. Man väljer ut 3 st för kontroll. Vad är antalet sätt att välja ut 3 felfria?
+Svar: Sats B ger:
+$$ {15 \choose 3} = 455 $$
+Vad är antalet sätt att få 2 felfria och 1 defekt?
+Svar: Sats B och multiplikationsprincipen ger:
+$$ {15 \choose 2}*{5 \choose 1} = 105 * 5 = 525 $$
+
+\subsection{Permutationer med upprepningar}
+Man har k grupper som består av resketive $ n_1, n_2, \dots , n_k $ lika objekt. Låt $ n = n_1 + n_2 + \dots + n_k$
+
+\subsection{Sats}
+Antalet sätt att arrangera i ordning (d.v.s. permutera) de n st objekten är
+$$ \f{n!}{n_1!*n_2!*\dots*n_k!} $$
+
+\subsubsection{Sats}
+Hur många permutationer av ordet ABRAKADABRA finns? 5 grupper. A, B, R, K, D.
+$$ n_1 = 5\ (\#A) $$
+$$ n_2 = 2\ (\#B) $$
+$$ n_3 = 2\ (\#R) $$
+$$ n_4 = 1\ (\#R) $$
+$$ n_5 = 1\ (\#D) $$
+
+Svaret:
+$$ \f{11!}{5!*2!*2!*1!*1!} = 83160 $$
+
+\section{Händelse och utfallsrum}
+\subsection{Definition A}
+Varje möjligt resultat av ett slumpförsök kallas ett utfall eller elementärhändelse.
+
+\subsection{Definition B}
+Mängden av alla utfall eller resultat kallar vi utfallsrum och betecknar det med $S$ eller $\Omega$.
+
+\subsection{Definition C}
+En händelse A är en mängd av utfall, d.v.s. en delmängd av $\Omega$.
+
+\subsection{Grundläggande operationer med händelser}
+{\color{red}Bilder på venn-diagramm ej ritade, se boken}
+\begin{itemize}
+    \item A uttalas ``A inträffar''.\\
+    \item $A\cap B$ eller $AB$ uttalas ``A och B inträffar'' eller ``A snitt B''.\\
+    \item $A\cup B$ eller $A + B$ uttalas ``A eller B inträffar'' eller ``A union B''.\\
+    \item $A^\complement$ eller $\overline{A}$ uttalas ``komplement till A''.\\
+\end{itemize}
+
+\subsection{Räkneregler}
+Kommutativa lagar
+$$ E\cup F = F\cup E $$
+$$ EF=FE $$\\
+
+Associativa lagar
+$$ (E\cup F)\cup G = E\cup (F\cup G) $$
+$$ (EF)G = E(FG) $$
+
+Distributiva lagar
+$$ (E\cup F)G = EG\cup FG $$
+$$ EF\cup G = (E\cup G)(F\cup G) $$
+
+De Morgans lagar
+$$ (E\cup F)^\complement = E^\complement F^\complement $$
+$$ (EF)^\complement = E^\complement \cup F^\complement $$
+
+\subsection{Räkneregler}
+Om både mamman och pappan är av genotypen (blå, brun) (d.v.s. har ett blått och ett brunt anlag), så är avkommans gensuppsättning en av följande fyra:\\
+(blå, blå), (blå, brun), (brun, blå), (brun, brun), vilket också är utfallsrummet.\\
+Intressant skulle vara att studera händelsen B=\{ (blå, blå), (blå, brun), (brun, blå) \} (minst ett blå anlag).
+och händelsen A=\{ (blå, brun), (brun, blå), (brun, brun) \} (minst ett brun anlag).\\
+Beskriv (med ord):
+\begin{itemize}
+    \item $A\cap B$ "precis ett blå och ett brunt anlag"
+    \item $A\cup B$ "hela utfallsrummet"
+\end{itemize}
+
+\end{document}

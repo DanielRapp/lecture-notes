@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+
+\begin{document}
+\section{Ex 2}
+$$ y' = x+y \eq y' - y = x; f(x) = -1, g(x) = x $$
+1) $ IF = e^{-x}, ty F(x) = -x$\\
+2) $ e^{-x}y' - e^{-x}y = e^{-x}x \eq $\\
+3) (kontroll) $ (e^{-x}y)' = e^{-x}x \im e^{-x}y = \int{xe^{-x} dx} = \int{x(-e^{-x})' dx} \overset{PI}{=} -xe^{-x} + \int{e^{-x} dx} = -xe^{-x} - e^{-x} + C = e^{-x}y:$\\
+4) $ y=-x-1+Ce^x $ - den allmänna lösningen.\\
+Svar: $ y=-x-1 + Ce^x $
+
+\section{Ex 3}
+$
+\begin{cases}
+  y' = x+y \im y= -x-1+Ce^x
+  y(0) = 1 \im 1=-1+C \eq C=2
+\end{cases}
+$
+Svar: $$ y=-x -1+2e^x $$ En partikulär lösning till vårt problem
+
+\end{document}
