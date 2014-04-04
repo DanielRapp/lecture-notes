@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+
+\begin{document}
+\section{Betingad sannolikhet}
+\subsection{Definition}
+Låt E och F vara två händelser.
+Antag $P(F)>0$. Sannolikheten för E \underline{betingat} av F betecknas med $P(E|F)$ och defineras som
+$$ P(E|F) = \f{P(EF)}{P(F)} $$
+\subsection{Exempel}
+Kasta en tärning E = \{ fått en etta \}, F = \{ fått ett ojämt antal ögon \}
+$$ P(E) = \f16, P(F) = \f12, P(EF) = \f16 $$
+$$ P(E|F) = \f{P(EF)}{P(F)} = \f13 \qed $$
+\subsection{Egenskaper}
+\subsubsection{Sats (a) (Lagen om total sannolikhet)}
+Låt $F_1, F_2, \dots, F_n$ disjunkta händelser med $P(F_i)>0, i=i,\dots,n,$ som uppfyller hela utfallsrummet (dvs $\cup^n_{i=1}F_i = S$). För varje händelse E gäller
+$$ P(E) = \sum_{i=1}^{n} P(E|F_i)P(F_i) $$
+
+\subsubsection{Sats (b) (Bayes' formel)}
+Under samma villkor som (a)
+$$ P(F_i|E) = \f{P(E|F_i)P(F_i)}{P(E)} $$
+
+\subsubsection{Bevis (a)}
+HL
+$$ \sum_{i=1}^{n} P(E|F_i)*P(F_i) = \sum_{i=1}^{n} \f{P(EF_i)}{P(F_i)}*P(F_i) = \sum_{i=1}^{n} P(EF_i) = P(\cup^n_{i=n}EF_i) = $$
+$$ P(E(P(\cup^n_{i=n}F_i))) = P(ES) = P(E) \qed$$
+
+\subsubsection{Bevis (b)}
+HL
+$$ \f{P(E|F_i)P(F_i)}{P(E)} = \f{\f{P(EF_i)}{P(F_i)}*P(F_i)}{P(E)} = \f{P(EF_i)}{P(E)} = P(F_i|E) \qed $$
+
+\subsection{Exempel}
+I en fabrik tillverkas 25\% av enheterna vid maskin 1, 35\% vid maskin 2 och 40\% vid maskin 3. Av produktionen är respektive 5\%, 4\% och 2\% defekt.\\
+
+Total sannolikhet
+$$ P(E) = P(E|F_1)P(F_1) + P(E|F_2)P(F_2) + P(E|F_3)P(F_3)$$
+\subsubsection{Fråga (a)}
+Hur stor är sannolikheten att en slumpmässigt vald enhet är defekt?
+
+\subsubsection{Fråga (b)}
+Antag att en kund påträffar en felaktig enhet. Hur stor är sannolikheten att den tillverkades av maskin 1?
+
+$$ \f{P(E|F_i)*P(F_i)}{P(E)} = P(F_i|E) $$
+
+\subsubsection{Lösning (a)}
+Rimligt ($i=1,2,3$)\\
+$F_i$ = \{ enhet var tillverkats vid maskin i \}\\
+$E_i$ = \{ enhet är felaktig \}\\
+Från text:
+$$ P(F_1)=0.25, P(F_2)=0.35, P(F_3)=0.4 $$
+Efter "omformulering":
+$$ P(E|F_1) = 0.05, P(E|F_2) = 0.04, P(E|F_3) = 0.02 $$
+Total sannolikhet ger
+$$ P(E) = P(E|F_1)P(F_1) + P(E|F_2)P(F_2) +P(E|F_3)P(F_3) = $$
+$$ = 0.05*0.25+0.04*0.35+0.02*0.4=0.0345 \qed $$
+
+\subsubsection{Lösning (b)}
+"givet att enheten är felaktig"
+$$ P(\ \ |E) $$
+"hur stor sannolikhet att enheten har tillverkats vid maskin 1?"
+$$ P(F_i|E) =$$
+$$= \f{P(E|F_i)P(F_i)}{P(E)} = \f{0.05*0.25}{0.0345} = 0.36 \qed $$
+
+\subsection{Oberoende händelser}
+Om betingad sannolikhet
+$$ P(E|F) = P(E) $$
+så påverkar F inte sannolikheten för E.\\
+Vi säger att E och F är oberoende om
+$$ P(E|F) = P(E) $$
+\subsection{Definition}
+Två händelser E och F säges vara \underline{oberoende} om
+$$ P(E\cap F) = P(E)P(F) $$
+
+\subsection{Exempel}
+Två enheter $B_1$ och $B_2$ är parallelkopplade. $B_1$ och $B_2$ fungerar oberoende av varandra (fysikaliskt).
+Vi antar att
+$$ P(\{ enhet\ B_i\ fungerar \}) = 0.9 $$
+Vi säger att systemet fungerar om minst en av $B_1$ och $B_2$ fungerar. Besäm sannolikheten att systemet fungerar.
+\subsubsection{Lösning}
+$$ A_1=\{ B_1\ fungerar\} $$
+$$ A_2=\{ B_2\ fungerar\} $$
+Vi ska bestämma
+$$ P(A_1\cup A_2) $$
+Slut av föreläsning 2:
+$$ = P(A_1) + P(A_2) - P(A_1 \cap A_2) = 0.9+0.9+0.81 = 0.99 $$
+
+\section{Stokastiska variabler (= slumpvariabler)}
+\subsection{Definition}
+En stokastisk variabel X är en funktion från utfallsrummet till den reella linjen $\mathcal{R}$, dvs $X: \Omega \rightarrow \mathcal{R}$.
+\subsection{Exempel}
+\begin{itemize}
+    \item X=pH-värdet i ett vattenprov.\\
+    \item Y=antalet studenter som lyckas genomföra en viss laboration inom en utsatt tid.
+\end{itemize}
+\subsection{Exempel}
+Kasta en tärning\\
+$E_1 =$ \{ fått en etta \} $\longrightarrow\ 1, X(E_1)=1$\\
+$\dots$ \\
+$E_6 =$ \{ fått en sexa\} $\longrightarrow\ 6, X(E_6)=6$\\\\
+Man säger också $P(X=1)=\f16\dots P(X=6)=\f16$.
+
+\subsection{Definition (a)}
+En stokastisk variabel säges vara \underline{diskret} om den kan anta ett ändligt eller uppräkneligt antal olika värden.
+
+\subsection{Definition (b)}
+För en diskrev stokastisk variabel defineras \underline{sannolikhetsfunktionen}
+$$ p_X(k) = P(X=k), \forall k\in Image(X)$$
+
+\subsection{Exempel}
+Gör två kast med ett mynt. Låt
+$$ X\ :\ \#(antalet)\ kast\ som\ ger\ krona $$
+X kan anta värdena $0, 1, 2$
+
+\subsubsection{Sannolikhetsfunktion}
+$$ p_X(0) = P(X=0) = P(\{ kl, kl \}) = \f14 $$
+$$ p_X(1) = P(X=1) = P(\{ kl, kr \} \cup \{ kr, kl \}) $$
+$$ = P(\{ kl, kr \}) + P(\{ kr, kl \}) = \f 12$$
+$$ p_X(2) = P(X=2) = P(\{ kr, kr \}) = \f 14$$
+
+\subsection{Exempel}
+Sannolikhetsfunktionen av en viss stokastisk variabel ges av 
+$$ P(X=k) = c\f{\lambda^k}{k!},\ k=0,1,2,\dots,\ \lambda>0 $$
+Bestäm C så att summan av alla P = 1.
+$$ 1 = \sum_{k=0}^{\inf} c\f{\lambda^k}{k!}= c\sum_{k=0}^{\inf} \f{\lambda^k}{k!} = c=e^\lambda \implies c=e^{-\lambda}  $$
+
+\end{document}
