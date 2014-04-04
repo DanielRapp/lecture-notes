@@ -7,7 +7,8 @@ If you just want to view the PDF-notes:
 
 * TAMS27 - Matematisk statistik (chronological order).
  * [Kombinatorik och utfallsrum](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/1lecture/lecture.pdf)
-
+ * No lecture notes for lecture 2. See the [kolmogorov probability axioms](http://en.wikipedia.org/wiki/Probability_axioms).
+ * [Betingad sannolikhet och stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/3lecture/lecture.pdf)
 
 * TATA42 - Envariabelanalys 2 (chronological order). All illustrations by [Adam Nyberg](https://github.com/adamnyberg).
  * [Plan area, kurvangd, volym](http://github.com/DanielRapp/lecture-notes/raw/master/TATA42/1lecture/lecture.pdf)
