@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+\newcommand{\RR}{{\mathcal{R}}}
+\newcommand{\N}{{\mathcal{N}}}
+\newcommand{\intf}{\int^{\infty}_{-\infty}}
+\newcommand{\intb}{\int^{1}_{0}}
+
+\begin{document}
+\section{Kontinuerliga stokastiska variabler}
+Discrete:
+$$ X:S\rightarrow C\subset \RR $$
+A countable set of real numbers.\\
+Continous:
+$$ X:S\rightarrow I\subseteq \RR $$
+I is an uncountable set = with the cardinality of the real numbers.
+
+
+\subsection{Definition}
+\begin{itemize}
+    \item X is called a continous random variable if it can take all values from a real interval or union of F (finite) intervals.\\
+      Example: Lifespan of a lightbulb. Weight of a raindrop. Circumference of a randomly chosen tree.
+    \item A function $f_x:\RR \rightarrow [0,\infty)$ which satisfies
+        $$ P(a\le X\le b) = \int^b_a f_x(x)dx $$
+        is called "density" function.
+      \item $F_X(x) = P(X\le x) = \int^x_{-\infty}f_X(y)dy$
+        is called the "comulative" distribution function.
+        $$P(a\le X\le b) = P(X\le b) - P(X\le a) = F_X(b)- F_X(a)$$
+\end{itemize}
+
+\subsection{Properties}
+\begin{itemize}
+    \item $ f_X(x) \le 0 $
+    \item $ \int^\infty_{-\infty} f_X(x)dx = 1 $
+    \item $P(a<X\le b) = P(a<X<b) = P(a\le X\le b) = P(a\le X<b)  $
+\end{itemize}
+
+\subsection{Remark}
+Since $f_X(x)$ is non-negative $\int f_X$ is an area
+
+\subsection{Example}
+Assume that X is a continous random variable with density function
+$$ f(x) =
+  \begin{cases}
+    c(4x-2x^2), 0<x<2\\
+    0, otherwise
+  \end{cases}
+$$
+Find the constant c and $P(X>1)$
+$$ \int^\infty_{-\infty} f(x) = 1 \rightarrow 1 = \int^\infty_{-\infty} c(4x-2x^2)dx-\int^2_0c(4x-2x^2)dx =$$
+$$= {\left[ c(2x^2 - \f 23 x^3) \right]}^2_0 = c(8-\f {16}3) = 1 \im c = \f 38  $$
+Now our density is
+$$ f(x) =
+  \begin{cases}
+    \f 38(4x-2x^2), 0<x<2\\
+    0, otherwise
+  \end{cases}
+$$
+$$ P(X>1) = \int^2_1 f(x)dx =\f 38 \int^2_1 \f 38(4x+2x^2) =\dots =\f12  $$
+
+\section{Expectation and variance}
+\subsection{Definitions}
+Let X be a continous random variable.
+\begin{itemize}
+    \item $ E[X] = \int^{\infty}_{-\infty} xf_X(x)dx $ \\is called expectation (or expected value) of X.
+    \item $ Var[X] = \int^{\infty}_{-\infty} (x-E[X])^2f_X(x)dx $ \\is called variance of X.
+    \item $ D[X] = \sqrt{Var(X)} $ \\is called standard deviation
+\end{itemize}
+
+\subsection{Remark}
+$$ Var(X) = E[X^2] - E[X]^2 = \int^\infty_{-\infty} x^2 f_x(x) dx - {\left( \int^\infty_{-\infty} xf_x(x)dx \right)}  $$
+
+\subsection{Theorem}
+The first and second properties are the same as in the descrete case.
+\begin{itemize}
+  \item $ E[a] = a, Var(a) = 0, \forall a \in \R $
+  \item $ E[aX+b] = aE[X]+b$
+  \item $Var(aX+b) = a^2Var(X)$
+  \item $E[g(x)] = \int^\infty_{\infty} g(x)f_X(x)dx$
+\end{itemize}
+
+\subsection{Example}
+$$ f_X(x) =
+  \begin{cases}
+    1, 0\le x\le 2\\
+    0, otherwise
+  \end{cases}
+$$
+$$ g(x) = e^x. E[e^x] = ?, Var(e^x) = ? $$
+\begin{itemize}
+  \item $$ E[e^X] = \intf (e^x)(f_X(x))dx = \int^1_0 e^x * 1 dx = e - 1 $$
+  \item $$ Var(X) = E[X^2] - E[X]^2 $$
+    $$ E[X^2] = E[(e^x)^2] = E[e^{2x}] = \intb e^{2x} * 1 dx  = {\left[ \f 12 e^{2x}\right]}^1_0 = \f 12(e^2-1)$$
+    $$ Var = \f(e^2-1) - {(e-1)}^2 $$
+\end{itemize}
+
+\section{Common distributions}
+\subsection{Uniform distribution}
+Uniform distribution on $[a,b]$ (the symbol $U([a,b])$)
+\subsubsection{Definition}
+$$ f_X(x) =
+  \begin{cases}
+    \f 1{b-a}, a\le x\le b\\
+    0, otherwise
+  \end{cases}
+$$
+
+\subsubsection{Theorem}
+\begin{itemize}
+  \item  $ f_X(x) =
+  \begin{cases}
+    0, -\infty \le x < a
+    \f {x-a}{b-a}, a\le x\le b\\
+    1, x\ge b
+  \end{cases}$
+ \item $ E[X] = \f{a+b}2, Var(X) = \f {{(b-a)}^2}{12} $
+\end{itemize}
+
+{\color{red} Proof not included}
+
+\subsection{Exponential distribution}
+$$ X\thicksim Exp(\lambda) $$
+Given a $0 < \lambda \in \R$
+$$ f_X(x) = \begin{cases}
+  \lambda e^{-\lambda x},\ x\le 0\\
+  0,\ otherwise
+\end{cases} $$
+
+\subsubsection{Theorem}
+\begin{itemize}
+    \item $ F_X(x) = \begin{cases} 
+      0,\ -\infty\le x\le 0\\
+      1-e^{-\lambda x},\ x\ge 0
+    \end{cases} $
+  \item $ E[X] = \f 1{\lambda}; Var(X) = \f 1{\lambda^2}$
+\end{itemize}
+
+\subsubsection{Theorem (Memoryless property)}
+Let $X\thicksim Exp(\lambda)$. We have that $P(X>t+x | X>t) = P(X>x)$
+\subsubsection{Proof}
+$$P(X>t+x | X>t) = \f{P(X>t+x ; X>t)}{P(X>t)} = \f{P(X>t+x)}{P(X>t)} = \f{1-F_X(t+x)}{1-F_X(t)} =$$
+$$\f{e^{-\lambda (t+x)}}{e^{-\lambda t}} = e^{-\lambda x} = 1-F_X(x) = P(X>x) \qed$$
+
+\subsection{Standard normal distribution}
+$$ X\thicksim \N(0, 1) $$
+The random variable has symbol Z, the density funciton is defined as 
+$$ f_X(x) = \f 1{\sqrt{2\pi}}e^{-\f{x^2}2}, x\in \R = (-\infty, \infty) $$
+$F_X(x)$ doesn't have an explicit formula.\\
+The symbol $F_X$ is $\Phi(x) = P(X\le x)$
+
+\subsubsection{Theorem}
+Let $ Z\thicksim \N(0, 1) $ then
+$$ E(Z) = 0, Var(Z)=1 $$
+Proof comes later in the course.
+
+\subsubsection{Example}
+$$ Z\thicksim \N(0, 1) $$
+\begin{itemize}
+    \item $ P(Z<2.11) = \Phi(2.11) = 0.9826,\ from\ table $
+      \item $ P(Z\le -2.11) = \Phi(-2.11) = 1-\Phi(2.11) = 1 - 0.9826 $
+        \item $ P(-2.21\le Z\le 2.11) = P(Z\le 2.11) - P(Z\le -2.21) = 0.9826  - 0.0163 = 0.969 $
+\end{itemize}
+
+\section{Standard deveation}
+$$ X\thicksim f_X(x) = \f 1 {(2\pi)\sigma}e^{ -\f{x-\mu}{2\sigma^2} } $$
+$$ X\thicksim \N(\mu, \sigma^2)$$
+
+\subsection{Theorem}
+$$ E[X] = \mu, Var(X) = \sigma^2 $$
+How do we compute $F_X(x)$?\\
+Standardization: we transform X in Z
+$$ Z = \f{x-\mu}{\sigma} \thicksim \N(0,1) $$
+
+\end{document}
