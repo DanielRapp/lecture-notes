@@ -10,6 +10,7 @@ If you just want to view the PDF-notes:
  * No lecture notes for lecture 2. See the [kolmogorov probability axioms](http://en.wikipedia.org/wiki/Probability_axioms).
  * [Betingad sannolikhet och stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/3lecture/lecture.pdf)
  * [Fördelningsfunktioner (Binomial- och poissonfördelningen) och väntevärde](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/4lecture/lecture.pdf)
+ * [Kontinuerliga stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/5lecture/lecture.pdf)
 
 ---
 
