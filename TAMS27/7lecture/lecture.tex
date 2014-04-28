@@ -1,0 +1,229 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+\newcommand{\RR}{{\mathcal{R}}}
+\newcommand{\N}{{\mathcal{N}}}
+\newcommand{\intf}{\int^{\infty}_{-\infty}}
+\newcommand{\intb}{\int^{1}_{0}}
+
+\begin{document}
+\section{Simultana fördelningar}
+\subsection{Def}
+Låt X, Y vara två diskreta slumpvariabler
+\begin{itemize}
+  \item $ p(x,y) = P(X=x, Y=y), \forall x,y $\\
+    kallas den simultana sannolikhetsfunktionen.
+  \item $ p_X(x) = P(X=x) = \sum_{\forall y}p(x,y) $\\
+        $ p_Y(y) = P(Y=y) = \sum_{\forall x}p(x,y) $\\
+        Kallas de marginella sannolikhetsfunktionerna.
+\end{itemize}
+
+\subsection{Def}
+I en urna finns
+
+\begin{itemize}
+  \item 3 röda
+  \item 4 vita
+  \item 5 blåa kulor
+\end{itemize}
+
+X: antalet röda kulor, Y: antalet vita kulor.\\
+Ta 3 styckna kulor.
+Vi ska bestämma den simultana och de marginella sannolikhetsfunktionerna.\\
+\begin{tabular}{ l | l l l l l l l }
+  $i,j$       & 0 & 1 & 2 & 3 & $P(X=i)$ & \\\hline
+  $0$         &$ \f{10}{220} $&$ \f{40}{220} $&$ \f{30}{220} $&$ \f{4}{220} $&$ \f{84}{220} $& \\
+  $1$         &$ \f{30}{220} $&$ \f{60}{220} $&$ \f{18}{220} $&$ 0 $&$ \f{108}{220} $& \\
+  $2$         &$ \f{15}{220} $&$ \f{12}{220}  $&$ 0 $&$ 0 $&$ \f{27}{220} $& \\
+  $3$         &$ \f{1}{220} $&$ 0 $&$ 0 $&$ 0 $&$ \f{1}{220} $& \\
+  $P(Y=j)$    &$ \f{56}{220} $&$ \f{112}{220} $&$ \f{48}{220} $&$ \f{4}{220} $&  & \\
+\end{tabular}
+
+\subsection{Def}
+Låt X, Y vara två kontinuerliga slumpvariabler.
+
+\begin{itemize}
+  \item Om det finns en icke-negativ funktion $f(x,y)$ sådan att
+    $$ P((X,Y) \in C) = {\int \int}_{(x,y)\in C}f(x,y)dxdy $$
+    För alla möjliga delmängder $C \subseteq \R^2$, så kallas $f$ den simultana täthetsfunktionen av X och Y.
+  \item $f_X(x) = \intf f(x,y)dy$
+   $f_Y(y) = \intf f(x,y)dx$
+   kallas de marginella täthetsfunktionerna.
+\end{itemize}
+
+\subsection{Anmärkningar}
+
+\begin{itemize}
+  \item I det \underline{diskreta} fallet: $p_X(x), p_Y(y)$ sannolikhetsfunktioner av de (enskilda) slumpvariabler X respektive Y.
+  \item I det \underline{kontinuerliga} fallet: $f_X(x), f_Y(y)$ täthetsfunktioner av de enskilda s.v. X respektive Y.
+\end{itemize}
+Det betyder att
+$$ P(X\in A) = \int_{x\in A} f_X(x)dx = \int_{x\in A} \intf f(x,y) dydx $$
+
+\subsection{Example}
+Låt
+$$
+f(x,y)=
+\begin{cases}
+  2e^{-x}e^{-2y}, 0<x<\infty, 0<y<\infty\\
+  0, annars
+\end{cases}
+$$
+
+vara den simultana täthetsfunktionen av $(X, Y)$.
+Bestäm
+\begin{itemize}
+  \item $P(X>1, Y<1)$
+  \item $P(X<Y)$
+  \item $P(X<a)$
+\end{itemize}
+
+\subsubsection{Lösning (1)}
+$$P(X>1, Y<1) =
+\int^{1}_{y=0} \int^{\infty}_{x=1} 2e^{-x}e^{-2y}dxdy  = \int^1_{y=0} 2e^{-2y} dy \int^{\infty}_{x=1} e^{-x}dx   = \cdots =$$
+$$\pa{1-e^{-2}}e^{-1} = e^{-1}-e^{-3}$$
+
+\newcommand{\intyy}{\int^{\infty}_{y=0}}
+\newcommand{\intxx}{\int^{y}_{x=0}}
+\newcommand{\intzf}{\int^{\infty}_{0}}
+\subsubsection{Lösning (2)}
+$$ P(X<Y) = {\int\int}_{(x,y):x<y} 2e^{-x}e^{-2y} dxdy  = \intyy\intxx 2e^{-x}e^{-2y} dxdy =$$
+$$ = \intyy 2e^{-2y}dy \intxx e^{-x} dx = \intzf 2e^{-2y}\pa{1-e^{-y}} dy = \cdots = \f 13$$
+
+\newcommand{\intyf}{\int^{\infty}_{-\infty}}
+\newcommand{\intyz}{\int^{\infty}_{-\infty}}
+\subsubsection{Lösning (3)}
+Beräkna först marginella täthetsfunktionen för X.
+$$ f_X(x) = \intyf f(x,y)dy = \intyz 2e^{-2y}e^{-x}dy = e^{-x}, x\leq 0 , X\thicksim Exp(1)$$
+$$ f_X(x) = 0 , x<0$$
+$$ P(X<a) = F_X(a) = 1-e^{-a} $$
+
+\section{Oberoende slumpvariabler}
+\subsection{Motivation}
+
+Oberoende händelser E,F
+$$ P(E\cap F) = P(E)P(F) $$
+
+\subsection{Definition}
+Låt X, Y vara två slumpvariabler. X och Y kallas oberoende om
+$$ P(X\in A, Y\in B) = P(X\in A)P(Y\in B), \forall A,b\subseteq \R $$
+
+\subsection{Sats}
+\begin{itemize}
+  \item \underline{diskret fall} Två diskreta s.v. X och Y är oberoende om och endast om
+    $$ p(x,y)=p_X(x)p_Y(y), \forall x,y $$
+  \item \underline{kontinuerligt fall} Två s.v. X och Y är oberoende om och endast om
+    $$ f(x,y)=f_X(x)f_Y(y), \forall x,y\in\R $$
+\end{itemize}
+
+\subsection{Anmärkning}
+Diskreta fallet kan skrivas så här
+$$ P(X=x, Y=y) = P(X=x)P(Y=y), \forall x,y$$
+
+\subsection{Example}
+I en urna finns
+
+\begin{itemize}
+  \item 3 röda
+  \item 4 vita
+  \item 5 blåa kulor
+\end{itemize}
+
+Ta ur 3. X: \# röda kulor. Y: \# vita kulor. Är X och Y oberoende?\\
+\begin{tabular}{ l | l l l l l l l }
+  $i,j$       & 0 & 1 & 2 & 3 & $P_X(i)$ & \\\hline
+  $0$         &$ \f{10}{220} $&$ \f{40}{220} $&$ \f{30}{220} $&$ \f{4}{220} $&$ \f{84}{220} $& \\
+  $1$         &$ \f{30}{220} $&$ \f{60}{220} $&$ \f{18}{220} $&$ 0 $&$ \f{108}{220} $& \\
+  $2$         &$ \f{15}{220} $&$ \f{12}{220}  $&$ 0 $&$ 0 $&$ \f{27}{220} $& \\
+  $3$         &$ \f{1}{220} $&$ 0 $&$ 0 $&$ 0 $&$ \f{1}{220} $& \\
+  $p_Y(j)$    &$ \f{56}{220} $&$ \f{112}{220} $&$ \f{48}{220} $&$ \f{4}{220} $&  & \\
+\end{tabular}\\
+Inte oberoende eftersom (t.ex.)
+$$ p(3,3) = 0 \neq p_X(3)p_Y(3) \neq 0 $$
+
+\subsection{Anmärkning}
+Om man vill visa att slumpvariabler X, Y \underline{inte} är oberoende räcker \underline{ett enda motexempel}.
+
+\subsection{Example}
+$$
+f(x,y)=
+\begin{cases}
+  2e^{-x}e^{-2y}, 0<x<\infty, 0<y<\infty\\
+  0, annars
+\end{cases}
+$$
+Är X och Y oberoende?
+
+\subsubsection{Lösning}
+Har redan beräknat
+$$
+f_X(x)=
+\begin{cases}
+  e^{-x} x\ge 0
+  0, annars
+\end{cases}
+$$
+
+\newcommand{\intzxf}{\int^{\infty}_{x=-\infty}}
+\newcommand{\intxxf}{\int^{\infty}_{x=0}}
+$$
+y\ge 0; f_Y(y)=\intzxf f(x,y) dx = \intxxz 2e^{-x}e^{-2y} dx = 2e^{-2y} \intxxf e^{-x} dx = 2e^{-2y} , Y\thicksim Exp(2)
+$$
+
+$$
+y\leq 0; f_Y(y)=0
+$$
+
+Vi konstaterar
+$$
+f_X(x)f_Y(y)=
+\begin{cases}
+  e^{-x}2e^{-2y}  0<x<\infty, 0<y<\infty\\
+  0, annars
+\end{cases}
+$$
+Alltså $f_X(x)f_Y(y) = f(x,y)$, X och Y är oberoende.
+
+\subsection{Example}
+Man och kvinna vill träffas på ett kafe. Antag att båda kommer oberoende av varandra (likformigt fördelad mellan kl 12 och kl 13).
+Bestäm sannolikheten att den som kommer först behöver vänta ländre än 10 min.
+
+\subsection{Lösning}
+X: ankomsttid av mannen i minuter efter kl 12.\\
+Y: ankomsttid av kvinnan i minuter efter kl 12.\\
+$$ X\thicksim U[0,60], Y\thicksim [0,60], X, Y oberoende \im $$
+$$ f_X(x) = 
+
+\begin{cases}
+  \f 1{60} 0\leq x \leq 60\\
+  \f 0, annars
+\end{cases}$$
+
+$$ f_X(x) = 
+
+\begin{cases}
+  \f 1{60} 0\leq y \leq 60\\
+  \f 0, annars
+\end{cases}$$
+
+X,Y oberoende:
+$$ f(x,y) = 
+
+\begin{cases}
+  \f 1{60^2} 0\leq x \leq 60, 0\leq y \leq 60\\
+  \f 0, annars
+\end{cases}$$
+
+Vi söker
+$$ P(\bra{X+10\le Y} \cup \bra{Y+10\le X}) = 2P(X+10\le Y) $$
+$$ 2{\int\int}_{x+10<y} \f 1{60^2}dxdy = \f{25}{36} \pa{>\f23} $$
+
+\end{document}
+
