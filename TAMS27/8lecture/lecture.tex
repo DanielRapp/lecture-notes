@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{macros}
+\usepackage{color}
+\newcommand{\Or}{{\mathcal{O}}}
+\newcommand{\RR}{{\mathcal{R}}}
+\newcommand{\N}{{\mathcal{N}}}
+\newcommand{\intf}{\int^{\infty}_{-\infty}}
+\newcommand{\intb}{\int^{1}_{0}}
+
+\begin{document}
+%Om C är konstig (t.ex. mängden av alla irrationella tal), gäller
+%$$ P((X,Y)\in C) = {\int\int}_{(x,y)\in C} f(x,y) dxdy $$
+%fortfarande?
+
+
+$$
+X_1\thicksim N(\mu_1, \sigma_1^2), \dots,  X_n\thicksim N(\mu_n, \sigma_n^2) \im
+$$
+$$
+X_1+\dots+X_n \thicksim N(\mu_1+\dots+\mu_n, \sigma_1^2+\dots+\sigma_n^2)
+$$
+
+
+$$
+X\thicksim Bin(n, p), Y\thicksim Bin(m, p) \im X+Y \thicksim Bin(n+m, p)
+$$
+$$
+X\thicksim Po(\lambda_1), Y\thicksim Po(\lambda_2) \im X+Y \thicksim Po(\lambda_1 + \lambda_2)
+$$
+
+We can approximate the binomial distribution with the normal distribution.
+$$ X\thicksim Bin(26, 0.4) $$
+$$ E[X] = 26*0.4 = 10.4,\ Var(X) = 26*0.4*0.6 = 6.24 $$
+$$ \hat{X}\thicksim \N(10.4, 6.24) $$
+
+\end{document}
+
