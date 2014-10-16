@@ -5,6 +5,10 @@ I write the notes in real-time, so there's going to be a lot of mistakes. Please
 ## PDFs
 If you just want to view the PDF-notes:
 
+* [TSDT84, a semi-complete summary of the first part.](https://github.com/DanielRapp/lecture-notes/blob/master/TSDT84/summary.pdf?raw=true)
+
+---
+
 * TAMS27 - Matematisk statistik (chronological order).
  * [Kombinatorik och utfallsrum](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/1lecture/lecture.pdf)
  * No lecture notes for lecture 2. See the [kolmogorov probability axioms](http://en.wikipedia.org/wiki/Probability_axioms).
