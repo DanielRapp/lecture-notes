@@ -13,6 +13,7 @@ If you just want to view the PDF-notes:
  * [Kontinuerliga stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/5lecture/lecture.pdf)
  * No lecture notes for lecture 6, see my [previous lecture notes on integrals from TATA41](http://github.com/DanielRapp/lecture-notes/raw/master/TATA41/7lecture/lecture.pdf).
  * [Simultana stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/7lecture/lecture.pdf)
+ * [Summor av oberoende stokastiska variabler](http://github.com/DanielRapp/lecture-notes/raw/master/TAMS27/7lecture/lecture.pdf) (få anteckningar). [Faltning](http://sv.wikipedia.org/wiki/Faltning)
 
 ---
 

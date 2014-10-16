@@ -1,0 +1,765 @@
+\documentclass{article}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{macros}
+\usepackage{color}
+\usepackage{amsmath,mathrsfs}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{ulem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\newcommand{\Or}{{\mathcal{O}}}
+\newcommand{\RR}{{\mathcal{R}}}
+\newcommand{\N}{{\mathcal{N}}}
+\newcommand{\F}{{\mathcal{F}}}
+\newcommand{\V}{{\mathcal{V}}}
+\newcommand{\U}{{\mathcal{U}}}
+\newcommand{\W}{{\mathcal{W}}}
+\newcommand{\0}{{\mathbf{0}}}
+\newcommand{\M}{{\mathcal{M}}}
+\newcommand{\LL}{{\mathcal{L}}}
+\newcommand{\intf}{\int^{\infty}_{-\infty}}
+\newcommand{\intb}{\int^{1}_{0}}
+\newcommand{\e}[1]{\stackrel{#1}{=}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\inner}[1]{\left\langle #1 \right\rangle}
+\newcommand{\texteq}[1]{\ensuremath{\stackrel{\text{#1}}{=}}}
+\usepackage[stable]{footmisc}
+
+\usepackage[textwidth=6.5in]{geometry}
+
+\definecolor{question}{RGB}{255,100,50}
+\definecolor{answer}{RGB}{0,0,255}
+
+\usepackage[OT2,T1]{fontenc}
+\DeclareSymbolFont{cyrletters}{OT2}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathalpha}{cyrletters}{"58}
+
+\begin{document}
+
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\section{Summary}
+This is an informal overview of the "system och signaler" course.
+
+\section{Linear algebra precursor}
+To fully motivate the definition of the fourier transform, we'll need
+a bit of linear algebra first.
+
+\subsection{Basis}
+I'll begin with the concept of a \textit{basis}.
+A list of vectors $v_1,\dots,v_n$ can be thought of as a basis
+if every other vector can be represented by the basis
+by uniquely scaling and adding them.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.7\textwidth]{img/basis.pdf}
+    \caption{This \textbf{is} a basis for $\R^2$}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.7\textwidth]{img/not_a_basis.pdf}
+    \caption{This \textbf{is not} a basis for $\R^2$}
+  \end{subfigure}
+\end{figure}
+
+
+\subsubsection{Example}
+For example the vectors
+$$ v_1 = \bmat{1 \\ 0}, v_2 = \bmat{0 \\ 1} $$
+is a basis for $\R^2$.
+
+\subsubsection{Question}
+Are the vectors
+$$ v_1 = \bmat{1 \\ 0}, v_2 = \bmat{2 \\ 0} $$
+a basis for $\R^2$? Why or why not?
+
+\clearpage
+\subsection{Functions are vectors}
+From linear algebra we're used to thinking of vectors like
+$$ v = \bmat{ 2 \\ 4 } $$
+as arrows, perhaps on the cartesian plane in the case of 2D vectors.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.9\textwidth]{img/vector.pdf}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.9\textwidth]{img/fn_as_vector.pdf}
+  \end{subfigure}
+\end{figure}
+
+But an important insight we'll need on our journey into the fourier transform
+is that functions can actually be seen as vectors!
+To motivate this, let's just think about how we could represent the $v$ above as a function $f$. Well the first entry
+has value $2$, and the second entry has value $4$, so
+$$ f[1] = 2, f[2] = 4 $$
+That certainly makes a lot of sense!
+And you could easily imagine how to convert arbitrary-dimensional vectors into functions.
+
+Using this notation we can efficiently plot vectors which would otherwise be impossible, like 6-dimensional vectors!
+\begin{center}
+  \includegraphics[width=0.4\textwidth]{img/6d_vector.pdf}
+\end{center}
+
+The whole point of this has been to illustrate that functions are indeed also vectors,
+which means it makes sense to define the dot-product between two functions, the length (aka norm)
+of a function, etc. In the next section we'll see how the dot-product of two functions could be defined.
+
+(So far we've been working with discrete functions, but
+using similar arguments it's also possible to see that continuous
+functions are vectors.)
+
+
+\subsection{Dot-product ("skalärprodukt")}
+From linear algebra we learned that a dot-product between two real vectors (i.e. with all elements real valued)
+$$v=\bmat{a_1 \\ \vdots \\ a_n}, w=\bmat{b_1\\ \vdots \\ b_n}$$
+is defined as
+$$ v\cdot w = a_1b_1 + \dots + a_n b_n  $$
+Note that $v\cdot v = a_1^2 + \dots + a_n^2 = \| v \|^2$, since $\| v \|$ is defined as $\| v \| = \sqrt{a_1^2 + \dots + a_n^2}$.
+
+Above we restricted ourselves to vectors with real-valued entries, but what about vectors with complex-valued entries?
+What happends if we use the above definition without modification? Well suppose we want to find out
+the length of $u=\bmat{i \\ 0}$. Intuitively you'd think the length of this would be $1$, i.e. $\| u \| = 1$.
+But look what happends if we try to calculate $u$ using the fact that $\| u \| = \sqrt{u \cdot u}$
+$$ \| u \| = \sqrt{u\cdot u} = \sqrt{i^2 + 0^2} = i $$
+So we get a complex length! Now that's not very intuitive!
+
+Instead of using this definition, we'll modify it slightly to ensure the norm is always a positive real.
+Recall that if $z$ is a complex number, then $z\overline{z}$ is always a positive real. Using
+this as inspiration we define the dot-product of two complex vectors (i.e. with complex-valued entries)
+$$v' = \bmat{z_1\\ \vdots \\ z_n}, w' = \bmat{h_1\\ \vdots\\ h_n}$$
+to be
+$$ v' \cdot w' = z_1 \overline{h_1} + \dots + z_n \overline{h_n} $$
+
+\subsubsection{Dot-products of functions}
+So far we've only looked at the dot-product of vectors in $\R^n$ and $\mathbb{C}^n$,
+but it's actually possible to also define the dot-product of functions.
+
+To motivate the definition, let's recall that for two complex vectors
+$$v=\bmat{v_1 \\ \vdots \\ v_n}, w=\bmat{w_1\\ \vdots \\ w_n}$$
+the following is their dot-product
+$$ v \cdot w = v_1 \overline{w_1} + \dots + v_n \overline{w_n} $$
+note that this can also be written as
+$$ v \cdot w = \sum^{n}_{k=1} v_{k}\overline{w_{k}} $$
+
+So the natural definition for a couple of discrete functions $t[x], h[x]$,
+where x goes from $1$ to $n$, is just
+$$ t[x] \cdot h[x] = \sum^{n}_{k=1} t[k]\overline{h[k]} $$
+
+What about continuous functions? We'll begin with periodic functions.
+When we go from the discrete to the continuous, series
+turn into integrals, thus it's be pretty natural that the definition should be something like
+$$ p(x) \cdot q(x) = \int f(x)\overline{g(x)} dx $$
+where $p(x)$ and $q(x)$ are periodic with period $T_0$. Notice that I didn't write the
+integration limits. What should these be? Well since an integral during a period of a periodic function really contains
+all the information about the area we need, it'd be reasonable to have the limits be one of the periods (e.g. from 0 to $T_0$)
+$$ p(x) \cdot q(x) = \int_{T_0} f(x)\overline{g(x)} dx $$
+Note that the integral will be equivalent no matter which period we choose.
+
+What about aperiodic functions $f(x)$ and $g(x)$? These can be seen as periodic functions but with an infinite
+period, so we just extend the above to
+$$ f(x) \cdot g(x) = \int^{\infty}_{-\infty} f(x)\overline{g(x)} dx $$
+Sometimes the dot-product between two functions is denoted $\inner{f,g}$, to avoid confusion
+from normal multiplication. I'll use this notation in the remainder of this document.
+
+\subsection{Orthagonality}
+Orthagonal is just a fancy word for perpendicular.
+
+So the definition of two vectors $v$ and $w$ being orthagonal is just that
+$$ v \cdot w = 0 $$
+or, using the notation for the dot-product between function two functions $f$ and $g$,
+$$ \inner{ f, g } = 0 $$
+
+We're especially interested in orthagonal bases, i.e. where all vectors
+in the basis are pairwise orthagonal.
+Why do we care about these types of bases? To motivate this, let's investigate
+what happends when we have a basis which \textbf{isn't} pairwise orthagonal, like
+$$ v_1 = \bmat{ 1 \\ 2 }, v_2 = \bmat{ 2 \\ 1 } $$
+Since $v_1 \cdot v_2 = 4 \neq 0$, this is not an orthagonal basis.
+
+Now suppose we're given some vector
+$$ v = \bmat{ 4 \\ 0 } $$
+and we want to find the scalars $\alpha_1, \alpha_n$ such that
+$$ v = \alpha_1 v_1 + \alpha_2 v_2 $$
+In other words, such that
+$$ \bmat{4 \\ 0} = \alpha_1 \bmat{1 \\ 2} + \alpha_2 \bmat{2 \\ 1} = \bmat{\alpha_1 \\ 2\alpha_1} + \bmat{2\alpha_2 \\ \alpha_2} $$
+So we need to solve the following system of equations
+$$
+\begin{cases}
+  \alpha_1 + 2\alpha_2 = 4\\
+  2\alpha_1 + \alpha_2 = 0
+\end{cases}
+$$
+How do we do this? You guessed it! Matrices!
+$$ \bmat{ 1 & 2 &|& 4 \\ 2 & 1 &|& 0} $$
+I'll skip the details, but eventually we get that
+$$ \alpha_1 = \alpha_2 = \f{4}{3}  $$
+Which you should verify is correct.
+
+Why did we do all this? To illustrate the point that arbitrary bases are annoying.
+What we really want, it turns out, are orthagonal bases!
+
+\subsubsection{Orthagonal bases}
+When we have an orthagonal basis it turns out
+there exists a really nice formula for each of the scalars. To motivate this,
+recall that the formula for projecting a vector $v$ onto another vector $u$
+is denoted by $proj_u(v)$ and is given by
+$$ proj_u(v) = \f {v \cdot u}{\| u \|^2} u $$
+If $u$ is normalized (i.e. $\| u \| = 1$) this turns just into
+$$ proj_u(v) = (v \cdot u) u $$
+So with this in mind, let's return to the original problem. Suppose we have some vector $v$ and
+we want to find the scalars $\alpha_1,\dots,\alpha_n$ such that
+$$ v = \alpha_1 e_1 + \dots + \alpha_n e_n$$
+where $e_1,\dots,e_n$ is an orthonormal (i.e. pairwise orthagonal and normalized) basis.
+Then we can sort of imagine "projecting" $v$ onto all basis vectors. Thus the scalars should be
+$$ v = (v \cdot e_1) e_1 + \dots + (v \cdot e_n) e_n $$
+and indeed this is the correct representation of $v$ in terms of the basis!
+
+\clearpage
+\section{Fourier series}
+Finally we come to what the course is actually about. Luckily
+this step will be super simple thanks to the background we've provided.
+
+\subsection{Searching for an orthonormal basis to the periodic functions}
+So we've motivated why orthonormal bases are important/nice. And we've
+seen some examples of orthonormal bases for $\R^2$. We'd now like
+to find an orthonormal basis for the set of periodic functions.
+
+\subsubsection{A first attempt (sinusoids of the same phase)}
+So suppose we have some periodic function $x_{T_0}(t)$ with period $T_0$. What
+might be an appropriate choice of building blocks to represent this? Well some of the most famously periodic functions
+are the sinusoids, so it seems reasonable that summing a bunch of these will eventually construct our function
+$$ x_{T_0}(t) \texteq{?} \sum^{\infty}_{n = 0} \alpha_n sin(n \omega_0 t) $$
+Here $\omega_0$ denotes the angular frequency, which is given by $\omega_0 = \f{2\pi}{T_0}$ (since $\omega_0 = 2\pi f_0$ and $T_0 = \f {1}{f_0}$).
+
+Notice here that all of these sinusoids have the same phase (they all start at zero and end at zero).
+Is there any problems with this? Are there periodic functions which cannot be represented as sinusoids, all of
+the same phase? It turns out yes.
+
+Consider the simple sine, shifted up by 1
+$$s(t) = 1+sin(t)$$
+Of all periodic function, surely you'd expect this to be
+representable by a series of sines! But consider what happends at $t=0$. Here $s(0) = 1$ but our sinusoids all start at zero!
+Adding an infinite amount of zeroes will never yeild $1$, so this function is not representable
+by our series.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[height=100px]{img/sinusoids.pdf}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[height=100px]{img/shifted_sinusoid.pdf}
+  \end{subfigure}
+\end{figure}
+
+You might think; "well if we need the x(0) to be 1, perhaps that's a sign sines are a bad choice, switch to a series of cosines instead!"
+But the problem remains here, for a series of cosines (all of the same phase) always start at 1, so how do we represent the most basic
+function of all; $x(t) = 0$?
+
+\subsubsection{A second attempt (sinusoids of different phases)}
+So sinusoids of the same phase won't work. What about if we also allow the phase to vary?
+$$ x_{T_0}(t) \texteq{?} \sum^{\infty}_{n = 0} \alpha_n sin(n \omega_0 t + \phi_n) $$
+Making $\omega_0=1, \phi_0 = \pi, \alpha_0 = 1, \phi_1 = 0, \alpha_1 = 1$ and all other $\alpha$'s zero
+yields
+$$ s(t) = 1\cdot sin(0\cdot t + \pi) + 1\cdot sin(1\cdot t + 0) + 0 + \dots  = 1 + sin(t)$$
+thus our problematic function above \textbf{will} be representable by this series. Seems promising.
+
+If you've worked with sinusoids before, however, you know it's annoying. There's trigonometric identities everywhere and integration is a pain.
+Although this series is promising, we'd really like to work with simpler terms.
+In the following section I'd like to argue that the series is actually equivalent to a much nicer series of
+complex exponentials.
+
+\subsubsection{A third attempt (compex exponentials, optional\footnote{Here we just show that we can represent the infinite sum of sinusoids as an infinite sum of complex exponentials.
+It can be skimmed if you don't care for long derivations.})}
+We begin by replacing all $\phi_k$ with $\theta_k + \pi$, thus transforming all sines into cosines. $\phi_k$ is just an arbitrary constant of our choosing so there's nothing stopping us from doing this.
+$$ \sum^{\infty}_{n = 0} \alpha_n sin(n \omega_0 t + \pi + \theta_n) = \sum^{\infty}_{n = -\infty} \alpha_n cos(n \omega_0 t + \theta_n)  $$
+Now we invoke eulers formula
+$$ cos(n\omega_0 t + \theta_n) = \f{e^{j(n\omega_0+\theta_n)} + e^{-j(n\omega_0 + \theta_n)}}{2} $$
+which, when replaced into the series, becomes
+$$ \sum^{\infty}_{n = 0} \f{\alpha_n}{2}\left( e^{jn\omega_0 + j\theta_0} + e^{-jn\omega_0 - j\theta_n} \right) = \sum^{\infty}_{n = 0} \left( \f{\alpha_n}{2}\left( e^{j\theta_0} e^{jn\omega_0} \right) + \f{\alpha_n}{2} \left( e^{-j\theta_n} e^{-jn\omega_0} \right) \right) $$
+We now split up the sum and replace $\f{\alpha_n}{2}e^{jn\omega_0}$ with $\beta_n$. (Notice that the complex conjugate $\overline{\beta_n} = \f{\alpha_n}{2}e^{-jn\omega_0}$.)
+So we get
+$$ \sum^{\infty}_{n = 0} \beta_n e^{jn\omega_0} + \sum^{\infty}_{n=0} \overline{\beta_n} e^{-jn\omega_n} = \sum^{\infty}_{n = 0} \beta_n e^{jn\omega_0} + \sum^{0}_{n=-\infty} \overline{\beta_{-n}} e^{jn\omega_n}$$
+Now we finally combine the sums again to get
+$$ \sum^{\infty}_{n = -\infty} \beta_n e^{jn\omega_0} $$
+And we're done. (Note that for $n<0$, $\beta_n = \overline{\beta_{-n}}$, and that $\beta_0 = \alpha_0$)
+
+\subsubsection{Orthonormal}
+So where are we? We're trying to find an orthonormal basis
+for the set of periodic functions. We began with the hunch that
+sinusoids might be appropriate. Sinusoids are annoying but luckily
+we found that the these were equivalent (due to eulers formula) to
+a set of complex exponentials. We'd now like to provide some rationale
+as to why these are an orthonormal basis for the set of periodic functions,
+meaning we should be able to represent \textit{any} periodic signal
+as a linear combination (a sum of scaled versions) of these complex exponentials.
+Not only that, but since they're an \textit{orthonormal} basis,
+we'll have a really simple formula for caluclating what each scalar should be!
+
+\textbf{Unfortunately} we won't be able to show that they're a basis\footnote{There exists a proof, I've just never seen it\dots},
+but we will show that they're orthonormal!
+
+Before starting we'll need need to assume that the period is $1$, thus $\omega_0 = 2\pi$ (this is just to simplify things, it's also possible
+to show for arbitrary periods\footnote{I'm lying here\dots Kind of. The problem is that there are two choices of basis functions. The first choice is
+  orthonormal and the other is just orthagonal. TSDT84 uses the orthagonal basis, and I'm trying to stay true to the course, but the formulas and motivation become much cleaner/easier
+  with the orthonormal case. The result is me trying to combine the two with lies.}).
+
+We will denote the n:th complex exponential by $e_n(t)$
+$$ e_n(t) = e^{j 2\pi n t} $$
+We begin by showing that they're orthagonal. (Recall that $\omega_0 = 2\pi$.)
+
+\paragraph{Orthagonal} We want to show that if $n\neq m$ then $\inner{e_n, e_m} = 0$. Suppose $n\neq m$
+$$\inner{e_n, e_m} = \int^{1}_{0} e^{j 2\pi n t}\overline{e^{j 2\pi m t}} dt = \int^{1}_{0} e^{j 2\pi (n-m) t} dt = \f{1}{2\pi(n-m)}\left( e^{j 2\pi (n-m)}- e^0 \right) = 0 $$
+
+\paragraph{Normalized} We begin with the fact that
+$$\inner{e_n, e_n} = \int^{1}_{0} e^{j 2\pi n t} \overline{e^{j 2\pi n t}} dt = \int^{1}_{0} e^{j 2\pi (n-n) t} dt = \int^{1}_0 1 dt = 1$$
+Recall that (by definition) $\| e_n \| = \sqrt{ \inner{e_n, e_n} }$, thus $\| e_n \| = 1$, which is what we wanted.
+
+
+\subsection{The final result}
+Now that we know the complex exponentials are an orthonormal basis for the set of
+periodic signals, what does that mean? It means every periodic signal $x(t)$
+can be represented as a linear combination of complex exponentials
+$$ x(t) = \sum^{\infty}_{n=-\infty} \alpha_{n} e^{j\omega_0 n t} $$
+and since the basis is orthonormal, we know that we can write each scalar $\alpha_k$ as
+$$ \alpha_k = \inner{x(t), e^{j\omega_0 k t}} = \int_{T_0} x(t)\overline{e^{j\omega_0 k t}} dt = \int_{T_0} x(t)e^{-j\omega_0 k t} dt $$
+
+And now we're done! We've successfully written a periodic signal in terms of a linear combination of complex exponentials.
+In the next section we'll extend this idea to signals which \textit{aren't} periodic.
+
+\clearpage
+\section{Fourier transform}
+The idea behind the fourier transform is really the same as fourier series,
+but instead of limiting ourselves to periodic signals, we'll also be able to deal with
+non-periodic signals (with one caveat, that their norm has to be finite,
+but we'll get to that shortly).
+
+Let's get right into it!
+
+We originally learned that since the complex exponentials is an orthonormal basis for the set
+of periodic functions (signals), that for every periodic signals $x(t)$ there exists a set of
+coefficients $\alpha_n$, where n ranges from $-\infty$ to $\infty$, such that
+$$ x(t) = \sum_{n=-\infty}^{\infty} \alpha_{n}e^{j\omega_0 n t} $$
+In particular (since it's an \textit{orthonormal} basis), that each term $\alpha_n$ could be written as\footnote{I feel I must
+remind the reader that using the definition of the dot-product as defined here is not really valid as it will not make
+the complex exponentials we've chosen an ortho\textit{normal} basis. The proper
+definition should include a $\f{1}{T_0}$ factor in front, but motivating the reason why complicates the concept of the dot-product and would take away from the main point this (informal) section
+is trying to make.}
+$$  \alpha_n = \inner{x(t), e^{j\omega_0 n t}} = \int_{T_0} x(t)e^{-j\omega_0 n t} dt. $$
+
+We now want to extend this notion to aperiodic functions. To do this, we simply\footnote{
+  Formally, the integral doesn't really make sense when we let $T_0 \to \infty$, but remember
+  that we're talking informally here.
+} let the period $T_0 \to \infty$. Remember that $T_0 = \f 1{f_0} = \f {2\pi}{\omega_0} \im \omega_0 = \f {2\pi}{T_0}$,
+so as $T_0 \to \infty, \omega_0 \to 0$. We're kind of getting more and more terms in the
+series representation of $x(t)$, until we're essentially dealing with a continuum of $\omega$'s, and
+the sum turns into an integral, called the \textit{inverse fourier transform},
+$$ x(t) = \f 1{2\pi} \int^{\infty}_{-\infty} \alpha_{\omega} e^{j\omega t} d\omega. $$
+(The $\f{1}{2\pi}$ factor is just something we engineers like because it makes some identities easier. The "mathematicians"
+fourier transform does not have the factor\footnote{This is a consequence of the different choices of basis functions mentioned above.}.)
+where $\alpha_{\omega}$ is the \textit{fourier transform}, denoted $ \alpha_{\omega} = \mathscr{F}\{ x(t) \} (\omega) $,
+and is defined (as you'd expect)
+$$ \mathscr{F}\{ x(t) \} = \inner{x(t), e^{j\omega t}} = \int^{\infty}_{-\infty} x(t)e^{-j \omega t} dt $$
+(Recall that the negative exponent is due to taking the conjugate of the second factor,
+which we motivated earlier.)
+
+\clearpage
+\subsection{Convergence and finite length}
+Unfortunately there's one caveat with the fourier transform, and that is that only
+functions with finite length can be transformed, because only these will make the integral converge.
+Recall that the length of a vector/function $f(t)$
+is defined as
+$$ \| f(t) \| = \sqrt{\inner{f(t),f(t)}} = \sqrt{ \int^{\infty}_{-\infty} |f(t)|^2 dt } $$
+
+Note that in the book the requirement is that the squared length $\| f \|^2$ be finite.
+This is done simply because then we don't have to deal with the square root.
+But of course these requirements are equivalent. (If the length is infinite then the squared length
+is infinite, and vice versa.)
+
+Why make this restriction? So what if the fourier transform diverges! Well suppose
+we had a two functions $g(t)$ and $h(t)$ with infinite energy and $g(t)\neq h(t)$, thus
+$$ \mathscr{F}\{ g(t) \} = \mathscr{F}\{ h(t) \} =  \infty $$
+But how do we go about inverting this? Should $\mathscr{F}^{-1}\{ \infty \} = g(t)$ or should
+$\mathscr{F}^{-1}\{ \infty \} = h(t)$? Clearly we cannot have it both ways. Instead we avoid the
+problem by just not letting the transform be defined for these types of functions.
+
+In the next section we'll investigate an way of dealing with these types of functions.
+
+\clearpage
+\section{Laplace transform}
+There are two types of laplace transforms. The unilateral and the bilateral.
+We'll begin with the bilateral.
+
+\subsection{The bilateral laplace transform}
+The bilateral laplace transform $\mathscr{L}_{II}$ of a signal $x(t)$ is
+$$ \mathscr{L}_{II} \{ x(t) \} = \int^{\infty}_{-\infty} x(t)e^{-st} dt $$
+where $s$ is the complex, dependent variable of the laplace. It can be seen as a generalization of the fourier transform.
+To see the motivation behind this statement, we have to dig into what the definition really means.
+
+Since $s$ is complex, let's rewrite it into $s=\sigma + j\omega$. What do we get?
+$$ \int^{\infty}_{-\infty} x(t)e^{-st} dt = \int^{\infty}_{-\infty} x(t)e^{-(\sigma+j\omega)t} dt = \int^{\infty}_{-\infty} x(t)e^{-\sigma t}e^{-j\omega t} dt $$
+But this looks suspiciously like the fourier transform of $x(t)e^{-\sigma t}$. Why would we ever want to do that? What's the point of all this?
+
+Recall what the central problem with the fourier transform was. We cannot analyze signals using the fourier transform if they have infinite energy.
+A simple example of this is the signal (called the "unit step" function)
+$$ u(t) =
+\begin{cases}
+  1\text{ if } t\ge 0\\
+  0\text{ if } t< 0
+\end{cases}
+$$
+which has energy
+$$ \inner{u(t), u(t)} = \int^{n}_{-n}u(t) dt = \int^{n}_{0} 1 dt \to \infty \text{ as } n\to \infty$$
+thus $u(t)$ is not analyzable with the fourier transform. But can we analyze it with the laplace transform? Yes!
+
+\begin{center}
+  \includegraphics[width=0.45\textwidth]{img/better_laplace.pdf}
+\end{center}
+
+The power of the laplace is that uses a exponentially decreasing function $e^{-\sigma t}$ to sort of "push down" signals which have infinite energy
+into finite energy.
+
+\clearpage
+\subsection{The unilateral laplace transform}
+The unilateral laplace transform, denoted $\mathscr{L}_{I}$ or just $\mathscr{L}$, of a signal $x(t)$ is
+$$ \mathscr{L} \{ x(t) \} = \int^{\infty}_{0^{-}} x(t)e^{-st} dt $$
+where $0^{-}$ means we also include the value of $x(t)$ at $t=0$, which becomes important when you laplace transform the (or functions
+containing the) dirac.
+
+Following analogy of the bilateral laplace, the unilateral laplace can be seen as taking the signal $x(t)$, then just ignoring
+the parts where $t<0$.
+
+\subsection{Region of convergence}
+Some care should be taken when evaluating the laplace.
+The main problem is that it (usually) doesn't converge for all possible choices of $s$.
+Instead we get a "region" where $s$ will make the transform converge to a useful value (i.e. not diverge into $\pm\infty$). This
+is called the "\textit{region of convergence}", abbreviated ROC.
+
+\subsubsection{Example}
+Let's take an example to illustrate this.
+Consider what happends when we try to evaluate the bilateral\footnote{Note that the choice of bilateral vs unilateral laplace
+transform in this case is arbitrary, the bilateral laplace quickly turns into the unilateral one. This is
+true in general when the signal is causal (i.e. when $x(t)=0$ for $t<0$)} laplace transform of $u(t)$. We'll assume $s\neq 0$ and
+then consider $s=0$ in a separate case below
+\begin{equation} \label{eq:laplace}
+  \mathscr{L}_{II} \{ u(t) \} = \int^{\infty}_{-\infty} u(t)e^{-st} dt = \int^{\infty}_{0} e^{-st} dt = \f{e^{-st}}{-s} \Big|^{t=\infty}_{t=0} = \bmat{s = \sigma + j\omega} = -\f 1s \left( e^{-\sigma t}e^{-j \omega t} \Big|_{t=0}^{t=\infty} \right)
+\end{equation}
+Now let's consider the upper and lower limits separately. We begin with the simple case; $t=0$.
+$$ e^{-\sigma t}e^{-j \omega t}\Big|_{t=0} = e^{0}e^{0} = 1 $$
+
+What about $t=\infty$?
+The intuitive way\footnote{The rigorous way is not part of the course, and requires complex analysis I suppose.} of thinking about this is; $e^{-\sigma t}e^{-j\omega t}$ is a complex number ($re^{j\phi}$).
+As $t\to \infty$, $e^{-j \omega t}$
+just spins round and round, what really determines whether the limit diverges or converges is how the length, $e^{-\sigma t}$, behaves
+as $t\to \infty$, thus we can ignore the second term and instead just think about $e^{-\sigma t}$ as $t\to \infty$.
+
+\begin{center}
+  \includegraphics[width=0.25\textwidth]{img/complex_compact.pdf}
+\end{center}
+
+\clearpage
+\begin{center}
+  \includegraphics[width=0.4\textwidth]{img/exponential.pdf}
+\end{center}
+
+Now think about\footnote{I conveniently ignored the case of $\sigma = 0$. In this case we'll need to return to the $e^{-j\omega t}$ term, since $e^{-\sigma t}\Big|_{\sigma t} = e^0 = 1$. The motivation
+behind ignoring this is that $e^{-j\omega t}$ will just spin around and round and, just like $sin(t)$, will not converge as $t\to \infty$, thus $\sigma = 0$ is not included in the ROC.} what happends if $\sigma > 0$ and $\sigma < 0$. For the case of $\sigma > 0$, $e^{-\sigma t}$
+becomes exponentially decreasing, which will converge to $0$ as $t \to \infty$. What about $\sigma < 0$?
+Here it becomes an exponentially increasing, so very divergent!
+
+Here's where the region of convergence comes in. We're interested in finding for what values of $s$ the transformation converges. We just
+found that it will only converge for $Re\{ s \} = \sigma > 0$, thus this will be our ROC!
+
+Now let's continue with \eqref{eq:laplace}.
+We'd found that (still assuming $s\neq 0$)
+$$  \mathscr{L}_{II} \{ u(t) \} = -\f 1s \left( e^{-\sigma t}e^{-j \omega t} \Big|_{t=0}^{t=\infty} \right) = -\f 1s \left( 0 - 1 \right) = \f 1s $$
+Provided $\sigma > 0$.
+
+What if $s=0$?
+$$ \mathscr{L}_{II} \{ u(t) \}(0) = \int^{\infty}_{-\infty} u(t)e^{-0\cdot t} dt = \int^{\infty}_{0} dt \to \infty $$
+Clearly $s=0$ is not in the region of convergence of $u(t)$. This was already included in the $Re\{ s \} > 0$ finding,
+so not terribly exciting.
+
+\subsubsection{Final result}
+The final result we got was that
+$$ \mathscr{L}_{II} \{ u(t) \} = \f 1s $$
+with a region of convergence of $Re\{ s \} > 0$.
+
+\clearpage
+\subsection{Why is it called a region?}
+So we got that the region of convergence for $\mathscr{L}_{II}\{ u(t) \}$ to be $Re\{ s \} > 0$. But why do
+we call it a \textit{region} of convergence? It seems more appropriate to call it an "interval" of convergence!
+But remember that $s$ is a complex number, and that we're only restricting the real part of $s$. Think about
+the whole complex plane. How would we visualize the ROC?
+
+\begin{center}
+  \includegraphics[width=0.3\textwidth]{img/roc.pdf}
+\end{center}
+
+As you see in the picture above, although the ROC can really be described as an interval on the real line, in the complex plane
+it's really a region.
+
+\subsection{Relation between laplace and fourier transform}
+Earlier we said that the laplace can be seen as a generalization of the fourier transform. Now that we know what the ROC is,
+I'd like to briefly return to this concept. Recall that
+$$ \mathscr{L}_{II}\{ x(t) \} = \int^{\infty}_{-\infty} x(t)e^{-st} dt = \bmat{s = \sigma + j\omega} = \int^{\infty}_{-\infty} \left( x(t)e^{-\sigma t} \right) e^{-j \omega t} dt = \mathscr{F}\{ x(t)e^{-\sigma t} \} $$
+If we now let $\sigma = 0$ we get
+$$ \mathscr{F}\{ x(t) \} = \mathscr{L}_{II}\{ x(t) \}\Big|_{Re\{ s \} = 0} $$
+It's important to realize that this wonderful little relation is \textbf{only} true if $Re\{ s \} = 0$ is in the region of convergence.
+
+Visualizing it on the complex plane, we can see the fourier transform as the imaginary axis! We let $Re\{ s \} = 0$ then
+plug in some value $\omega = Im\{ s \}$ on the horizontal axis (the imaginary axis) to get the value of the fourier transform
+at that point!
+
+\begin{center}
+  \includegraphics[width=0.35\textwidth]{img/fourier_in_laplace.pdf}
+\end{center}
+
+
+
+\clearpage
+%\subsection{Inverse laplace (unilateral)}
+%\subsection{Inverse laplace (bilateral)}
+
+\subsection{Poles and Zeros}
+Here are some laplace transforms that we might encounter
+$$ \f{1}{s+1}, \f{s+2}{(s-1)^2(s+3)}, \f{s-5}{s^2(s+2)}, \dots $$
+As you can see, it's common that they can be represented as some polynomial divided by another polynomial.
+
+The roots of the denominator are called the poles and zeroes of the transform and are the points where
+the polynomials explode into $+\infty$ or $-\infty$, respectively\footnote{But shouldn't it be $\pm$ \textit{complex} $\infty$?
+Since the values of the transform are complex.}.
+These points are often drawn together with the ROC on the "s-plane" (which we've drawn above).
+
+For instance $sin(\omega_0 t)u(t)$ has laplace transform $\f {\omega_0}{s^2+\omega_0^2}$, with ROC $Re\{ s \} > 0$. The polynomial
+explodes to $\infty$ at $s=\pm i$, thus the "s-plane" can be visualized as
+
+\begin{center}
+  \includegraphics[width=0.4\textwidth]{img/zeroes.pdf}
+\end{center}
+
+I won't prove it, but it turns out that the ROC will always have zeroes and/or poles at the edges.
+
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{img/poles.pdf}
+\end{center}
+
+\clearpage
+\subsection{Warnings}
+Here's a few common misconceptions and things to think about regarding the laplace.
+
+
+\subsubsection{Complex heightmap}
+The visualization of the laplace transform, displaying the ROC can be very useful. But it's important to realize
+that what we're viewing is not a heightmap, i.e. we can't make the plot 3D to visualize the "actual" transform,
+because each point is a complex number.
+
+Let's take $\mathscr{L}\{ u(t) \} = \f 1s$, with ROC $Re\{ s \} > 0$ as an example.
+In order to fully see what value the transformation has at a given point, we need
+two plots, one for the real part and one for the imaginary part.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.7\textwidth]{img/real.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=0.7\textwidth]{img/imaginary.png}
+  \end{subfigure}
+\end{figure}
+
+Note that we're displayin the whole plane here, whereas the transformation will only converge for $Re\{ s \}>0$. The image may show a finite value for $Re\{ s \} < 0$, but that does
+not mean the the transformation would converge there. $\mathscr{L}\{ u(t) \} = \f 1s$ is only valid for $\sigma = Re\{ s \}>0$.
+
+
+
+\clearpage
+\section{Brief interlude}
+Where are we? We started investigating periodic, continuous, signals. We showed that as long as these have finite energy,
+then we could write these as a sum (linear combination) of complex exponentials. We then moved on to aperiodic signals
+and showed that by letting the period tend to infinity, these could also be analyzed with the \textit{fourier transform}.
+
+We took a quick sidestep investigating signals with infinite energy, and showed how these could be managed with
+the \textit{laplace transform}.
+\\\\
+\centerline{
+  \includegraphics[width=0.85\textwidth]{img/summary1.png}
+}
+Now we're ready to leave the contiuous world and enter the discrete, starting with the z-transform and then moving on
+with the discrete-time fourier transform.
+
+
+\section{Sampling}
+Let's say we have a continous function $x(t)$ and we'd like to analyze it with a computer.
+Computers can only deal with discrete values, so what do we do? We have to find some
+way of discretizing the signal. This is called sampling.
+\\\\
+\centerline{
+  \includegraphics[width=0.7\textwidth]{img/sampling.pdf}
+}
+\\
+The most obvious way of sampling the signal is just to periodically, say with period $T$,
+pluck out values and call this our sampled signal, let's call it $x[n] = x(nT)$,
+where $n$ is an integer. Plug in $n=3$ and we get the third sample-value of $x(t)$.
+
+We'll get to how to choose the sampling-period $T$ later when we get to the Nyquist–Shannon sampling theorem.
+
+
+\clearpage
+\section{Z-transform}
+So far we've only been able to deal with (periodic and aperiodic) \textbf{contiuous} signals. Now we'd like to focus on the more
+practical, realistic, time-discrete signals. We call them "time-discrete" to emphasize the fact that it's the time-domain
+that's discrete, not the frequency-domain (like we had in the fourier series case).
+
+\subsection{Discrete signals in a continuous world}
+In the previous section we described how to sample a function; just create a new function $x[n] = x(nT)$. Unfortunately
+our tools are useless for dealing with this function, since we can only handle the contiuous. Luckily there's a way
+of constructing this sort of discrete function in the continous world. Just place a bunch of scaled deltas where the discrete values would be!
+\\\\
+\centerline{
+  \includegraphics[width=0.75\textwidth]{img/discrete_dirac.pdf}
+}
+\\
+Sure, that sounds neat and all, but how would we go about representing this mathematically?
+
+Well perhaps we can make use of the (conveniently named) \textit{sampling property} of the dirac delta!
+$$ x(t)\delta(t-T) dt = x(T)\delta(t-T) $$
+
+Now I'd like to introduce a new function, the $\Sha_T$ function (pronounced "Sha", a.k.a. the dirac comb or the dirac train).
+This is just an infinite amount of diracs spaced $T$ apart.
+$$ \Sha_T(t) = \sum^{\infty}_{n=-\infty} \delta(t - nT) $$
+
+Inspired by the sampling property, look what happends if we
+multiply $\Sha_T$ with $x(t)$
+$$ \Sha_T x(t) = \sum^{\infty}_{n=-\infty} x(t)\delta(t-nT) = \sum^{\infty}_{n=-\infty} x(nT)\delta(t-nT) = \sum^{\infty}_{n=-\infty} x[n]\delta(t - nT) $$
+Let $\overline{x}(t) = \Sha_T x(t)$ and we've got our function!
+\\\\
+\centerline{
+  \includegraphics[width=0.48\textwidth]{img/multiplicative_sampling.pdf}
+}
+
+\subsection{Converting contiuous transforms into discrete ones}
+So now that we know how to construct "discrete" signals in the contiuous world, it's easy
+to just convert our existing transforms into discrete equivalents. We'll begin with the laplace transform and we'll call its
+discrete equivalent the \textit{z-transform}.
+
+Let's just laplace transform $\overline{x}(t)$
+\begin{equation*}
+  \begin{split}
+    \mathscr{L}_{II}\{ \overline{x}(t) \} &= \int^{\infty}_{-\infty} \overline{x}(n) e^{-st} dt \\
+    &= \int^{\infty}_{-\infty} \left( \sum^{\infty}_{n=-\infty} x[n] \delta(t - nT) \right) e^{-st} dt\\
+    &= \sum^{\infty}_{n=-\infty} x[n] \int^{\infty}_{-\infty} \delta(t-nT)e^{-st} dt\\
+    &= \sum^{\infty}_{n=-\infty} x[n]e^{-snt} = \bmat{z = e^{sT}}\\
+    &= \sum^{\infty}_{n=-\infty} x[n]z^{-n}\\
+    &\texteq{def} \mathscr{Z}\{ x[n] \}
+  \end{split}
+\end{equation*}
+% We've kind of ignored that x[n] actually *does* depend on t here. Uhm...
+
+Thus for discrete signals we'll use the z-transform, but remember that it's really the laplace in disguise.
+\\\\
+\centerline{
+  \includegraphics[width=1.1\textwidth]{img/z_laplace_relation_clean.pdf}
+}
+
+\clearpage
+\subsection{Region of convergence}
+We've seen that the z-transform of a discrete signal is equivalent (by definition) to the laplace of a bunch of (equally spaced) diracs, thus
+in order to gain further insight into the z-transform we can just analyze the laplace.
+
+There's one caveat though. Remember that the laplace transform depended on the variable $s$, whereas the z-transform depends on $z$. The relationship between
+them is $z=e^{sT}$. Thus when you take your signal, sample it, and wish to laplace transform it as if it was the original (continous) signal (using the z-transform), you must remember
+that everything will be in polar coordinates. Lines turn into circles.
+
+Let's take an example to illustrate the point.
+
+\subsubsection{Example}
+Say we want to find the z-transform of $u[t]$.
+$$ \mathscr{Z}\{ u[n] \} = \sum^{\infty}_{-\infty} u[n]z^{-n} = \sum^{\infty}_{0} z^{-n} $$
+Here's where the ROC comes in. We already know (from single variable calculus) that this
+converges to
+$$ \f{z}{z-1} $$
+if\footnote{and only if?} $|z|>1$.
+Also note that we have a pole at $z=1$.
+
+Put together this transform can be visualized in the "z-plane" as
+\\\\
+\centerline{
+  \includegraphics[width=0.5\textwidth]{img/z_roc.pdf}
+}
+
+
+
+
+
+\clearpage
+
+\section{Discrete-time fourier transform}
+There's two ways of deriving the discrete-time fourier transform (DTFT).
+\begin{itemize}
+  \item Convert discrete signals into contiuous equivalents (by multiplying
+    with the dirac comb, thus sampling) and then apply the normal (continous) fourier transform
+    which will (hopefully) produce an expression dependent on a discrete signal $x[n]$, which
+    we'll take as the definition.
+    This is how we did it when we went from the laplace to the z-transform.
+  \item Alternatively, we could recognize the relation between the z-transform
+    and the laplace, and the relation between the laplace and fourier, and try to
+    find the definition from there instead.
+\end{itemize}
+We'll be taking the second route.
+
+\section{Deriving the DTFT}
+So suppose we have some signal $x(t)$.
+We begin by sampling it $\overline{x}(t) = \Sha_T x(t)$.
+Now recall that
+$$ \mathscr{F}\{ \overline{x}(t) \} = \mathscr{L}\{ \overline{x}(t) \}\Big|_{\sigma = 0} = \mathscr{Z}\{ x[t] \}(e^{-j\omega T}) $$
+assuming $Re\{ s\} = 0$ is in the ROC.
+We now just rename $\omega T$ to $\Omega$ (called the "normalized" frequency) and we've got our DTFT!
+$$ DTFT\{ x[t] \} \texteq{def} \mathscr{Z}\{ x[n] \}(e^{j\Omega}) = \sum^{\infty}_{n=-\infty} x[n]e^{-j\Omega n} $$
+
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{img/summary2.pdf}
+\end{center}
+
+\subsection{Why is the frequency spectrum of the DTFT periodic?}
+The standard way of explaining why the DTFT is periodic starts with a picture.
+
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{img/dtft_unit.pdf}
+\end{center}
+
+As is clear from the derivation above, the values of the DTFT exist on the unit circle in
+the "z-plane" (assuming it's in the ROC, of course). This is analogous to how the fourier transform can be seen as the imaginary axis in
+the "s-plane". As you vary the angle $\Omega$ around the circle you'll eventually come back to where you started,
+which is why it's periodic.
+
+\subsubsection{Alternative (optional)}
+That's the usual way of explaining it, but I'd like to show it from a slightly different direction.
+Instead of taking the z-transform route we'll go directly from the fourier transform of the sampled signal $\overline{x}(t) = \Sha x(t)$.
+We assume sampling period $T=1$ for simplicity, but the result is analogous for arbitrary periods.
+$$ DTFT\{ x(t) \} = \mathscr{F}\{ \overline{x}(t) \} = \mathscr{F}\{ \Sha_T x(t) \} $$
+Now use the convolution/multiplication duality of the fourier transform and the fact\footnote{Provable using the Poisson summation formula.} that $\mathscr{F}\{ \Sha \} = \Sha$
+$$ \mathscr{F}\{ \Sha_T x(t) \} = \mathscr{F}\{ \Sha_T \} * \mathscr{F}\{ x(t) \} = \Sha * \mathscr{F}\{ x(t) \} $$
+Since $\Sha$ convolved with any function will make it periodic, we're done!
+
+What we've shown is that the DTFT is precisely a version of the original signal, but periodized!\footnote{For
+  period $T$ the result would be $DTFT\{ x(t) \} = \f 1T \Sha_{\f 1T} \mathscr{F}\{ x(t) \}$.}
+
+Fun fact; this is one of the steps in the Nyquist-Shannon theorem proof!
+
+
+\end{document}
