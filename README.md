@@ -5,7 +5,7 @@ I write the notes in real-time, so there's going to be a lot of mistakes. Please
 ## PDFs
 If you just want to view the PDF-notes:
 
-* [TSDT84, a semi-complete summary of the whole course.](https://github.com/DanielRapp/lecture-notes/blob/master/TSDT84/summary.pdf?raw=true)
+* [TSDT84, a semi-complete summary.](https://github.com/DanielRapp/lecture-notes/blob/master/TSDT84/summary.pdf?raw=true)
 
 ---
 
